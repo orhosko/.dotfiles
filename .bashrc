@@ -27,6 +27,11 @@ fi
 # --------------------------------------
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
+alias em="emacsclient -c -a ''"
+alias fanstate="cat /sys/devices/platform/asus-nb-wmi/fan_boost_mode"
+
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 # --------------------------------------
 unset rc
