@@ -64,3 +64,5 @@
   :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
 
 (package! auto-dark)
+
+(package! catppuccin-theme)
