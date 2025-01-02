@@ -66,3 +66,8 @@
 (package! auto-dark)
 
 (package! catppuccin-theme)
+
+;; -------------------------------------
+(package! org-present)
+
+(package! visual-fill-column)

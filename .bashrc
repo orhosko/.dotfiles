@@ -47,10 +47,15 @@ alias upd="dupd; fupd"
 export VISUAL=nvim
 export EDITOR="$VISUAL"
 
+alias mirror="scrcpy --video-codec=h265 -m1920 --max-fps=60 --no-audio -K"
+alias mirror-tcp="scrcpy --video-codec=h265 -m1920 --max-fps=60 --no-audio -K --tcpip"
+
 # --------------------------------------
 unset rc
 export PATH=$PATH:/home/berkay/.spicetify:/opt/riscv64_1/bin
 . "$HOME/.cargo/env"
 
+export PATH=$HOME/Documents/projects/cling/cling-build/bin:$PATH
+export PATH=$HOME/Documents/projects/cling/cling/tools/Jupyter/kernel/scripts:$PATH
 
 eval "$(starship init bash)"
