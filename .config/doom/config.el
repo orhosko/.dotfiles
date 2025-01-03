@@ -245,3 +245,11 @@
 (add-hook 'org-present-mode-hook 'my/org-present-start)
 (add-hook 'org-present-mode-quit-hook 'my/org-present-end)
 (add-hook 'org-present-after-navigate-functions 'my/org-present-prepare-slide)
+
+(defun display-line-numbers-equalize ()
+  "Equalize The width"
+  (setq display-line-numbers-width (length (number-to-string (line-number-at-pos (point-max))))))
+(add-hook 'find-file-hook 'display-line-numbers-equalize)
+
+(use-package org-appear
+  :hook (org-mode . org-appear-mode))
