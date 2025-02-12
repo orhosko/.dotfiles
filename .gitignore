@@ -1,0 +1,4 @@
+emacs/vanilla-emacs/*
+
+!emacs/vanilla-emacs/init.el
+!emacs/vanilla-emacs/+*
