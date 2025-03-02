@@ -19,6 +19,10 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
+  (customize-set-variable 'evil-want-C-i-jump nil)
+  (customize-set-variable 'evil-respect-visual-line-mode t)
+  (customize-set-variable 'evil-want-C-h-delete t)
+  (customize-set-variable'evil-want-C-u-scroll t)
   :config
   (evil-mode 1)
   (evil-set-undo-system 'undo-redo))
@@ -28,6 +32,9 @@
   :ensure t
   :config
   (evil-collection-init))
+
+(keymap-set evil-insert-state-map "C-g" 'evil-normal-state)
+(keymap-global-set "C-M-u" 'universal-argument)
 
 ;; ---------------------------------------------------------------------------
 
@@ -131,12 +138,25 @@
   :ensure t
   :config
   (global-diff-hl-mode)
-  (diff-hl-flydiff-mode)
+  ;; (diff-hl-flydiff-mode)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 )
 
 (use-package crdt
   :ensure t)
+
+(use-package tabspaces
+  :ensure t
+  :config
+  (tabspaces-mode)
+  (define-key evil-normal-state-map (kbd "SPC TAB ,") 'tabspaces-switch-to-buffer)
+  (define-key evil-normal-state-map (kbd "SPC TAB b") 'tabspaces-switch-to-buffer)
+  (define-key evil-normal-state-map (kbd "SPC TAB k") 'tabspaces-kill-buffers-close-workspace)
+  (define-key evil-normal-state-map (kbd "SPC TAB o") 'tabspaces-open-or-create-project-and-workspace)
+  (define-key evil-normal-state-map (kbd "SPC TAB TAB") 'tabspaces-switch-or-create-workspace)
+  (customize-set-variable 'tabspaces-use-filtered-buffers-as-default t)
+  (customize-set-variable 'tabspaces-remove-to-default t)
+  (customize-set-variable 'tabspaces-include-buffers '("*scratch*")))
 
 ;;; EditorConfig support
 ;; (unless (package-installed-p 'editorconfig)
@@ -162,6 +182,14 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
+(use-package pdf-tools
+    :ensure t
+    :config
+    (pdf-tools-install))
+
+(add-hook 'text-mode-hook #'flyspell-mode)
+(add-hook 'prog-mode-hook #'flyspell-prog-mode)
+
 ;; ---------------------------------------------------------------------------
 
 ;; Add extra context to Emacs documentation to help make it easier to
@@ -181,6 +209,7 @@
 ;; ---------------------------------------------------------------------------
 
 (use-package go-mode
+  :after eglot
   :ensure t)
 
 (use-package json-mode
@@ -190,6 +219,7 @@
   :ensure t)
 
 (use-package typescript-mode
+  :after eglot
   :ensure t)
 
 (use-package markdown-mode

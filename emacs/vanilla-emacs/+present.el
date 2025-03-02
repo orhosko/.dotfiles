@@ -1,7 +1,15 @@
+(use-package visual-fill-column
+  :ensure t
+  :config
+  ;;; Centering Org Documents --------------------------------
+  ;; Configure fill width
+  (customize-set-variable 'visual-fill-column-width 120)
+  (customize-set-variable 'visual-fill-column-center-text t))
+
 ;;; Theme and Fonts ----------------------------------------
 
        ;; Set reusable font name variables
-       (defvar my/fixed-width-font "JetBrains Mono Nerd Font"
+       (defvar my/fixed-width-font "JetBrains Mono"
        "The font to use for monospaced (fixed width) text.")
 
        (defvar my/variable-width-font "Inter"
@@ -43,16 +51,6 @@
 (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
 (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
 (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-
-;;; Centering Org Documents --------------------------------
-
-;; Install visual-fill-column
-(unless (package-installed-p 'visual-fill-column)
-  (package-install 'visual-fill-column))
-
-;; Configure fill width
-(setq visual-fill-column-width 120
-      visual-fill-column-center-text t)
 
 ;;; Org Present --------------------------------------------
 

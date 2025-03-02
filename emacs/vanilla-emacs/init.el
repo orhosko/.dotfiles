@@ -7,10 +7,10 @@
 
 ;; --- Activate / Deactivate modes --------------------------------------------
 
-;; (menu-bar-mode -1) 
 ;; (icomplete-vertical-mode 1)
 
 (tool-bar-mode -1) (blink-cursor-mode -1)
+(scroll-bar-mode -1) (menu-bar-mode -1) 
 (global-hl-line-mode 1)
 (pixel-scroll-precision-mode 1)
 
@@ -127,6 +127,7 @@
 (recentf-mode t)
 (global-auto-revert-mode t)
 (global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'relative)
 
 (electric-pair-mode t)
 (show-paren-mode 1)
@@ -149,7 +150,14 @@
 
 (load (expand-file-name "+packages.el" user-emacs-directory))
 (load (expand-file-name "+keybindings.el" user-emacs-directory))
-(load (expand-file-name "+nano-theme.el" user-emacs-directory))
+
+; (load (expand-file-name "+nano-theme.el" user-emacs-directory))
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-gruvbox t))
+
+; (load "~/nano-emacs/nano-modeline.el")
 (load (expand-file-name "+present.el" user-emacs-directory))
 (load (expand-file-name "+org.el" user-emacs-directory))
 

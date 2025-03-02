@@ -21,8 +21,14 @@
 ;   - +notes
 ;   - SPC-n-r
 ;     - roam
+(defun org-find ()
+  (interactive)
+  (find-file org-directory))
+
 (define-key evil-normal-state-map (kbd "SPC n r f") 'org-roam-node-find)
 (define-key evil-normal-state-map (kbd "SPC n r i") 'org-roam-node-insert)
+(define-key evil-normal-state-map (kbd "SPC n f") 'org-find)
+(define-key evil-normal-state-map (kbd "SPC n c") 'org-capture)
 
 ; - SPC-.
 ;   - find files

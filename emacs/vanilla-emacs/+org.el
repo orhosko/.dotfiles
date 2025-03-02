@@ -1,4 +1,17 @@
 (setq org-directory "~/Documents/org/")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+
+(setq org-capture-templates
+        '(("t" "Personal todo" entry
+           (file+headline "todo.org" "Inbox")
+           "* [ ] %?\n%i\n%a" :prepend t)
+          ("n" "Personal notes" entry
+           (file+headline "notes.org" "Inbox")
+           "* %u %?\n%i\n%a" :prepend t)
+          ("j" "Journal" entry
+           (file+olp+datetree "journal.org")
+           "* %U %?\n%i\n%a" :prepend t)))
+
 
 ;;; Outline-based notes management and organizer
 ;(global-set-key (kbd "C-c l") #'org-store-link)
