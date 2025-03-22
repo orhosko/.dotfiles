@@ -27,3 +27,5 @@
     # Exec=Hyprland
     Exec=/bin/sh -l -c Hyprland
     Type=Application
+
+# https://www.gnu.org/software/stow/manual/html_node/Types-And-Syntax-Of-Ignore-Lists.html
