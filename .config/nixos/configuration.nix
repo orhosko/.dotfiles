@@ -322,7 +322,7 @@ home-manager.users.berkay = { pkgs, ... }: {
         shellAliases = {
           ll = "ls -l";
           edit = "sudo -e";
-          update = "sudo nixos-rebuild switch";
+          update = "sudo nixos-rebuild switch --flake ~/.dotfiles/.config/nixos --impure";
         };
     
         history.size = 10000;
