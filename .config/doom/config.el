@@ -122,10 +122,13 @@
 ;(add-to-list 'default-frame-alist '(undecorated . t))
 ;(add-to-list 'default-frame-alist '(alpha . 99))
 
+(setq load-theme 'catppuccin)
+
 (after! doom-themes
   ;; set  your favorite themes
+  (setq! catppuccin-flavor 'latte)
   (setq! auto-dark-dark-theme 'doom-gruvbox
-        auto-dark-light-theme 'doom-gruvbox-light)
+        auto-dark-light-theme 'catppuccin)
   (auto-dark-mode 1))
 
 ;; Let the desktop background show through
@@ -135,15 +138,15 @@
 ;;; Theme and Fonts ----------------------------------------
 
        ;; Set reusable font name variables
-       (defvar my/fixed-width-font "JetBrains Mono Nerd Font"
+       (defvar my/fixed-width-font "JetBrains Mono"
        "The font to use for monospaced (fixed width) text.")
 
        (defvar my/variable-width-font "Inter"
        "The font to use for variable-pitch (document) text.")
 
 ; NOTE: These settings might not be ideal for your machine, tweak them as needed!
-       (set-face-attribute 'default nil :font my/fixed-width-font :weight 'light :height 110)
-       (set-face-attribute 'fixed-pitch nil :font my/fixed-width-font :weight 'light :height 120)
+       (set-face-attribute 'default nil :font my/fixed-width-font :weight 'light :height 100)
+       (set-face-attribute 'fixed-pitch nil :font my/fixed-width-font :weight 'light :height 110)
        (set-face-attribute 'variable-pitch nil :font my/variable-width-font :weight 'light :height 1.1)
 
 ;;; Org Mode Appearance ------------------------------------
@@ -152,7 +155,7 @@
 (require 'org-faces)
 
 ;; Hide emphasis markers on formatted text
-(setq org-hide-emphasis-markers t)
+(setq! org-hide-emphasis-markers t)
 
 ;; Resize Org headings
 (dolist (face '((org-level-1 . 1.2)
@@ -178,21 +181,12 @@
 (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
 (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
 
-;;; Centering Org Documents --------------------------------
-
-;; Install visual-fill-column
-(unless (package-installed-p 'visual-fill-column)
-  (package-install 'visual-fill-column))
-
 ;; Configure fill width
-(setq visual-fill-column-width 120
-      visual-fill-column-center-text t)
+(after! visual-fill-column
+(setq! visual-fill-column-width 120
+      visual-fill-column-center-text t))
 
 ;;; Org Present --------------------------------------------
-
-;; Install org-present if needed
-(unless (package-installed-p 'org-present)
-  (package-install 'org-present))
 
 (defun my/org-present-prepare-slide ()
   (org-overview) ;; Show only top-level headlines
@@ -219,7 +213,6 @@
 
 (add-hook 'org-mode-hook
   (lambda ()
-  ;; Center the presentation and wrap lines
   (visual-fill-column-mode 1)
   (visual-line-mode 1)))
 
@@ -242,14 +235,27 @@
 ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
 
 ;; Register hooks with org-present
-(add-hook 'org-present-mode-hook 'my/org-present-start)
-(add-hook 'org-present-mode-quit-hook 'my/org-present-end)
-(add-hook 'org-present-after-navigate-functions 'my/org-present-prepare-slide)
+(add-hook! 'org-present-mode-hook 'my/org-present-start)
+(add-hook! 'org-present-mode-quit-hook 'my/org-present-end)
+(add-hook! 'org-present-after-navigate-functions 'my/org-present-prepare-slide)
 
 (defun display-line-numbers-equalize ()
   "Equalize The width"
   (setq display-line-numbers-width (length (number-to-string (line-number-at-pos (point-max))))))
 (add-hook 'find-file-hook 'display-line-numbers-equalize)
 
-(use-package org-appear
-  :hook (org-mode . org-appear-mode))
+(use-package! org-appear
+   :hook (org-mode . org-appear-mode))
+
+;; (require 'verilog-ext)
+;; (verilog-ext-mode-setup)
+;; (verilog-ext-eglot-set-server 've-verible-ls)
+
+;; (use-package! lsp-bridge
+;;   :config
+;;   (setq lsp-bridge-enable-log nil)
+;;   (global-lsp-bridge-mode))
+
+;; Performance tweaks for modern machines
+(setq! gc-cons-threshold 100000000) ; 100 mb
+(setq! read-process-output-max (* 1024 1024)) ; 1mb
