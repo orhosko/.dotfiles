@@ -29,3 +29,5 @@
     Type=Application
 
 # https://www.gnu.org/software/stow/manual/html_node/Types-And-Syntax-Of-Ignore-Lists.html
+
+# sudo nixos-rebuild switch --flake ~/.dotfiles/.config/nixos#hostname --impure
