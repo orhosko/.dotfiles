@@ -48,7 +48,13 @@
               ;;("TAB" . 'copilot-accept-completion)
               ;;("C-TAB" . 'copilot-accept-completion-by-word)
               ;;("C-<tab>" . 'copilot-accept-completion-by-word)
-  ))
+              )
+  :config
+  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
+  (add-to-list 'copilot-indentation-alist '(org-mode 2))
+  (add-to-list 'copilot-indentation-alist '(text-mode 2))
+  (add-to-list 'copilot-indentation-alist '(closure-mode 2))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 ;; ---------------------------------------------------------------------------
 
@@ -103,6 +109,8 @@
   (global-corfu-mode)
   :custom
   (corfu-auto t)
+  :config
+  (setq text-mode-ispell-word-completion nil)
   ;; You may want to play with delay/prefix/styles to suit your preferences.
   ;; (corfu-auto-delay 0)
   ;; (corfu-auto-prefix 0)
@@ -241,6 +249,7 @@
 ;; ---------------------------------------------------------------------------
 
 (use-package verilog-ext
+  :ensure t
   :hook ((verilog-mode . verilog-ext-mode))
   :init
   ;; Can also be set through `M-x RET customize-group RET verilog-ext':
@@ -266,4 +275,5 @@
           block-end-comments
           ports))
   :config
-  (verilog-ext-mode-setup))
+  (verilog-ext-mode-setup)
+  (define-key verilog-mode-map (kbd ";") 'self-insert-command))

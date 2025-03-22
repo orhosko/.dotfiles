@@ -10,7 +10,7 @@
 ;   - D: delete this buffer
 (define-key evil-normal-state-map (kbd "SPC b b") 'switch-to-buffer) ;; +vertico/switch-workspace-buffer
 (define-key evil-normal-state-map (kbd "SPC b d") 'kill-buffer) ;; +vertico/kill-buffer)
-(define-key evil-normal-state-map (kbd "SPC b D") 'kill-this-buffer)
+(define-key evil-normal-state-map (kbd "SPC b D") (lambda () (interactive) (kill-buffer (current-buffer))))
 
 ; - SPC-SPC
 ;   - find files in project
@@ -29,6 +29,7 @@
 (define-key evil-normal-state-map (kbd "SPC n r i") 'org-roam-node-insert)
 (define-key evil-normal-state-map (kbd "SPC n f") 'org-find)
 (define-key evil-normal-state-map (kbd "SPC n c") 'org-capture)
+(define-key evil-normal-state-map (kbd "SPC n a") 'org-agenda)
 
 ; - SPC-.
 ;   - find files
@@ -122,3 +123,6 @@
   (interactive)
   (find-file (file-name-directory user-init-file)))
 (define-key evil-normal-state-map (kbd "SPC f c") 'find-config)
+
+;; <visual>gc
+(define-key evil-visual-state-map "gc" 'comment-or-uncomment-region)

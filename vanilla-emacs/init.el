@@ -12,7 +12,7 @@
 (tool-bar-mode -1) (blink-cursor-mode -1)
 (scroll-bar-mode -1) (menu-bar-mode -1) 
 (global-hl-line-mode 1)
-(pixel-scroll-precision-mode 1)
+;;(pixel-scroll-precision-mode 1)
 
 ;; --- Sane settings ----------------------------------------------------------
 
@@ -23,11 +23,15 @@
 
 ;; ---------------------------------------------------------------------------
 
-;; (setq font-use-system-font t) ;; Use whatever the default monospace font is
+(setq native-comp-async-report-warnings-errors nil)
+
+;; ---------------------------------------------------------------------------
+
+(setq font-use-system-font t) ;; Use whatever the default monospace font is
 
 ;; Set the font. Note: height = px * 100
-(set-face-attribute 'default nil :font "JetBrains Mono Nerd Font" 
-				:height 120 :weight 'light) 
+;; (set-face-attribute 'default nil :font "JetBrains Mono" 
+;; 				:height 105 :weight 'light) 
 
 ;; (set-face-attribute 'default nil
 ;;                    :height 140 :weight 'light :family "Roboto Mono")
@@ -157,6 +161,13 @@
   :config
   (load-theme 'doom-gruvbox t))
 
+(use-package auto-dark
+  :ensure t
+  :config
+  (setq auto-dark-dark-theme 'doom-gruvbox)
+  (setq auto-dark-light-theme 'doom-one-light)
+  (auto-dark-mode 1))
+
 ; (load "~/nano-emacs/nano-modeline.el")
 (load (expand-file-name "+present.el" user-emacs-directory))
 (load (expand-file-name "+org.el" user-emacs-directory))
@@ -176,6 +187,8 @@
 (setenv "PATH" (concat (getenv "PATH") ":/home/berkay/.local/bin:/home/berkay/bin"))
 (add-to-list 'exec-path "/home/berkay/.local/bin")
 (add-to-list 'exec-path "/home/berkay/bin")
+
+(setenv "DICPATH" "/home/berkay/.config/hunspell")
 
 ;; --- Speed benchmarking -----------------------------------------------------
 

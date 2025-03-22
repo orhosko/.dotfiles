@@ -44,10 +44,13 @@
 ;; ---------------------------------------------------------------------------
 
 (use-package org
-  :bind
-  (:map org-mode-map
-        ("C-<return>" . +org/insert-item-below)
-        ("C-S-<return>" . +org/insert-item-above)))
+  :config
+  (setq org-list-allow-alphabetical 't)
+  (setq org-M-RET-may-split-line 'nil))
+
+;;   (:map org-mode-map
+;;         ("C-<return>" . +org/insert-item-below)
+;;         ("C-S-<return>" . +org/insert-item-above)))
 
 (use-package org-contrib
   :ensure t)
