@@ -94,6 +94,8 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  hardware.facetimehd.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -139,6 +141,7 @@
   gnumake
   ninja
   boost
+  bazel
 
   # warp-terminal
   
