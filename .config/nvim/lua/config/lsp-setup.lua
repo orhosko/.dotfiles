@@ -8,4 +8,6 @@ require'lspconfig'.verible.setup{
   cmd = {'verible-verilog-ls', '--rules_config_search'},
 }
 
+require('lspconfig').pylsp.setup{}
+
 -- require'lspconfig'.lua_ls.setup{}

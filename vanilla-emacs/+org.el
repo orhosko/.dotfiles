@@ -23,6 +23,7 @@
   :config
   (setq org-roam-directory "~/Documents/org-roam/")
   (setq org-roam-index-file "~/Documents/org-roam/index.org")
+  (setq org-agenda-files (list org-directory org-roam-directory))
   (setq org-startup-folded t)
   (setq org-return-follows-link t)
   (org-roam-db-autosync-mode))
