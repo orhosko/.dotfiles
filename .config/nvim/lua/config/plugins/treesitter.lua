@@ -15,6 +15,7 @@ return { -- Highlight, edit, and navigate code
 			"query",
 			"vim",
 			"vimdoc",
+			"mlir",
 		},
 		auto_install = true,
 		highlight = {

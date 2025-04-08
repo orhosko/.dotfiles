@@ -94,6 +94,8 @@
   (add-hook 'prog-mode-hook #'eglot-ensure)
   (add-to-list 'eglot-server-programs
                `(verilog-mode . ("verible-verilog-ls")))
+  (add-to-list 'eglot-server-programs
+               `(mlir-mode . ("mlir-lsp-server")))
   )
 
 ;; In addition to installing packages from the configured package
@@ -171,6 +173,8 @@
 ; (load "~/nano-emacs/nano-modeline.el")
 (load (expand-file-name "+present.el" user-emacs-directory))
 (load (expand-file-name "+org.el" user-emacs-directory))
+
+(load (expand-file-name "modes/mlir-mode.el" user-emacs-directory))
 
 ;; ---------------------------------------------------------------------------
 

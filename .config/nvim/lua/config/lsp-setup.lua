@@ -10,4 +10,11 @@ require'lspconfig'.verible.setup{
 
 require('lspconfig').pylsp.setup{}
 
+require('lspconfig').mlir_lsp_server.setup{}
+vim.filetype.add({
+  extension = {
+    mlir = 'mlir',
+  }
+})
+
 -- require'lspconfig'.lua_ls.setup{}
