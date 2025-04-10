@@ -1,3 +1,4 @@
 vanilla-emacs/*
 !vanilla-emacs/init.el
 !vanilla-emacs/+*
+!vanilla-emacs/modes/
