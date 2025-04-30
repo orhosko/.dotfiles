@@ -19,6 +19,11 @@
 
     stow .
 
+# keyd
+https://github.com/rvaiya/keyd
+- compile
+- fill /etc/keyd/default.conf
+
 # hyprland - gdm bug
 
     [Desktop Entry]
