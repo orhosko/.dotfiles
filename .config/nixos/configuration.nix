@@ -165,7 +165,11 @@
 
   # lazygit
 
+  wev
+
   rofi-wayland
+  hyprshot
+  waybar
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
