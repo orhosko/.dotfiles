@@ -170,6 +170,8 @@
   rofi-wayland
   hyprshot
   waybar
+  brightnessctl
+  playerctl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
