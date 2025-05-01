@@ -212,8 +212,8 @@
   (org-modern-list '((?+ . "➕") (?* . "➤") (?- . "➖"))))
 
 (modify-all-frames-parameters
- '((right-divider-width . 40)
-   (internal-border-width . 40)))
+ '((right-divider-width . 20)
+   (internal-border-width . 20)))
 (dolist (face '(window-divider
                 window-divider-first-pixel
                 window-divider-last-pixel))

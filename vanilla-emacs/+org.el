@@ -26,6 +26,7 @@
   (setq org-agenda-files (list org-directory org-roam-directory))
   (setq org-startup-folded t)
   (setq org-return-follows-link t)
+  (setq org-use-sub-superscripts '{})
   (org-roam-db-autosync-mode))
 
 (use-package websocket
