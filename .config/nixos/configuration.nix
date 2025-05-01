@@ -100,6 +100,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   neovim
+  tree-sitter
   wl-clipboard
   lua-language-server
   stylua
@@ -125,6 +126,9 @@
   gcc
   gdb
   llvmPackages_20.bintools-unwrapped
+
+  zig
+  zls
 
   verilator
   verible
@@ -282,7 +286,7 @@ services.keyd = {
 
 swapDevices = [{
   device = "/swapfile";
-  size = 4 * 1024; # 4GB
+  size = 6 * 1024; # 6GB
 }];
 
 nix.gc = {
