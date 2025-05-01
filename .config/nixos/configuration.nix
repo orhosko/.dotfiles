@@ -56,6 +56,8 @@
     variant = "";
   };
 
+  programs.hyprland.enable = true;
+
   # Disable CUPS
   services.printing.enable = false;
 
@@ -162,6 +164,8 @@
   killall
 
   # lazygit
+
+  rofi-wayland
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
