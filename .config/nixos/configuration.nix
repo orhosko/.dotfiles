@@ -58,6 +58,11 @@
 
   programs.hyprland.enable = true;
 
+  programs.nautilus-open-any-terminal = {
+    enable = true;
+    terminal = "ghostty";
+  };
+
   # Disable CUPS
   services.printing.enable = false;
 
@@ -120,6 +125,12 @@
 
   stow
 
+  rustup
+
+  eww
+  jq
+  socat
+
   git
   gh
 
@@ -172,6 +183,8 @@
   waybar
   brightnessctl
   playerctl
+  dunst
+  libnotify
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
