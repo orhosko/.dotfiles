@@ -187,6 +187,10 @@
   libnotify
 
   tldr
+
+  normcap
+  papers
+  foliate
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -216,9 +220,9 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
 
-  services.flatpak.enable = true;
+  # services.flatpak.enable = true;
+
   environment.variables.EDITOR = "nvim";
-  # services.neovim.defaultEditor = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   services.xserver.desktopManager.gnome = {
