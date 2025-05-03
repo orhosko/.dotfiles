@@ -160,6 +160,8 @@
 (volume)
 (wifi)
 (sep)
+(theme-toggle)
+(sep)
 (bat)
 (mem)
 (sep)
@@ -186,7 +188,7 @@
   (box :class "bar_class"
        :orientation "h"
   (right)
-  (center)
+  ;(center)
   (left)
     ))
 
@@ -195,7 +197,7 @@
 	  :exclusive "true"
           :geometry (geometry :x "0%"
                        :y "9px"
-                       :width "98%"
+                       :width "95%"
                        :height "30px"
                        :anchor "top center")
           :stacking "fg"
@@ -361,3 +363,14 @@
       )
     )
   )
+
+(deflisten theme :initial "dark" "~/.config/eww/scripts/theme --get")
+(defwidget theme-toggle []
+  (box 
+  :class "theme_module" :vexpand "false" :hexpand "false" 
+  (button
+    :class "theme-button"
+    :onclick "eww update theme=$(~/.config/eww/scripts/theme)"
+    :tooltip "Toggle Dark/Light Mode"
+    (label :text "${theme == "dark" ? "" : ""}")))
+)
