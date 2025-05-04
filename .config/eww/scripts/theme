@@ -1,4 +1,4 @@
-#!/run/current-system/sw/bin/bash
+#!/bin/bash
 
 get_theme() {
     current=$(gsettings get org.gnome.desktop.interface color-scheme)
