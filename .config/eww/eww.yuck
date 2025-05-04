@@ -197,7 +197,7 @@
 	  :exclusive "true"
           :geometry (geometry :x "0%"
                        :y "9px"
-                       :width "95%"
+                       :width "98%"
                        :height "30px"
                        :anchor "top center")
           :stacking "fg"
