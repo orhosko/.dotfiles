@@ -1,7 +1,7 @@
-#!/run/current-system/sw/bin/bash
+#!/bin/bash
 
 status=$(nmcli g | grep -oE "disconnected")
-essid=$(nmcli c | grep wlp3s0 | awk '{print ($1)}')
+essid=$(nmcli c | grep wlo1 | awk '{print ($1)}')
 
 if [ $status ] ; then
     icon="󰤯"
