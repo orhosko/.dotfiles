@@ -9,7 +9,7 @@
 ;;; Theme and Fonts ----------------------------------------
 
        ;; Set reusable font name variables
-       (defvar my/fixed-width-font "JetBrains Mono"
+       (defvar my/fixed-width-font "JetBrains Mono Nerd Font"
        "The font to use for monospaced (fixed width) text.")
 
        (defvar my/variable-width-font "Inter"
