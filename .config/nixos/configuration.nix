@@ -100,12 +100,17 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  documentation.dev.enable = true;
 
   hardware.facetimehd.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
+  man-pages
+  man-pages-posix
+
   neovim
   tree-sitter
   wl-clipboard
