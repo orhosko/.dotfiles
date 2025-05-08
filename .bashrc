@@ -53,9 +53,9 @@ alias mirror-tcp="scrcpy --video-codec=h265 -m1920 --max-fps=60 --no-audio -K --
 # --------------------------------------
 unset rc
 export PATH=$PATH:/home/berkay/.spicetify:/opt/riscv64_1/bin
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
 
 export PATH=$HOME/Documents/projects/cling/cling-build/bin:$PATH
 export PATH=$HOME/Documents/projects/cling/cling/tools/Jupyter/kernel/scripts:$PATH
 
-eval "$(starship init bash)"
+# eval "$(starship init bash)"
