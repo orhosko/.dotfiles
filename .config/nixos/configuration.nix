@@ -156,6 +156,8 @@
   python312Packages.apycula
 
   python3
+  python312Packages.python-lsp-server
+
   nodejs
   #go
 
@@ -183,13 +185,16 @@
 
   wev
 
-  rofi-wayland
   hyprshot
+  hyprpaper
+
+  rofi-wayland
   waybar
   brightnessctl
   playerctl
   dunst
   libnotify
+  pavucontrol
 
   tldr
 
