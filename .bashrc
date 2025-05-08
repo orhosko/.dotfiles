@@ -1,7 +1,7 @@
 #export PATH="/Directory1:$PATH" .bashrc
 
-HISTSIZE=-1
-HISTFILESIZE=-1
+export HISTSIZE=-1
+export HISTFILESIZE=-1
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
