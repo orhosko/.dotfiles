@@ -27,6 +27,7 @@
   (setq org-startup-folded t)
   (setq org-return-follows-link t)
   (setq org-use-sub-superscripts '{})
+  (plist-put org-format-latex-options :scale 1.5) ; TODO: scale with text too
   (org-roam-db-autosync-mode))
 
 (use-package websocket

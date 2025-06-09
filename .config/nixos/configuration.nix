@@ -91,7 +91,7 @@
     description = "berkay";
     extraGroups = [ "networkmanager" "wheel" "plugdev" ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -108,99 +108,104 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
 
-  man-pages
-  man-pages-posix
+    man-pages
+    man-pages-posix
 
-  neovim
-  tree-sitter
-  wl-clipboard
-  lua-language-server
-  stylua
+    neovim
+    tree-sitter
+    wl-clipboard
+    lua-language-server
+    stylua
 
-  anki-bin
-  mpv
+    anki-bin
+    mpv
 
-  google-chrome
+    google-chrome
 
-  emacs
-  fd
+    emacs
+    fd
 
-  ripgrep
-  unzip
+    ripgrep
+    unzip
 
-  stow
+    stow
 
-  rustup
+    #rustup
 
-  eww
-  jq
-  socat
+    go
+    gopls
 
-  git
-  gh
+    eww
+    jq
+    socat
 
-  clang
-  clang-tools
-  gcc
-  gdb
-  llvmPackages_20.bintools-unwrapped
+    git
+    gh
 
-  zig
-  zls
+    clang
+    clang-tools
+    gcc
+    gdb
+    llvmPackages_20.bintools-unwrapped
 
-  verilator
-  verible
-  yosys
-  nextpnr
-  openfpgaloader
-  python312Packages.apycula
+    zig
+    zls
 
-  python3
-  python312Packages.python-lsp-server
+    verilator
+    verible
+    yosys
+    nextpnr
+    openfpgaloader
+    python312Packages.apycula
 
-  nodejs
-  #go
+    python3
+    python312Packages.python-lsp-server
 
-  cmake
-  gnumake
-  ninja
-  boost
-  bazel
+    nodejs
+    #go
 
-  # warp-terminal
-  
-  libreoffice-fresh
-  hunspell
-  hunspellDicts.tr_TR
+    cmake
+    gnumake
+    ninja
+    boost
+    bazel
 
-  syncthing
+    # warp-terminal
 
-  alacritty
-  ghostty
-  zellij
-  minicom
-  killall
+    libreoffice-fresh
+    hunspell
+    hunspellDicts.tr_TR
 
-  # lazygit
+    syncthing
 
-  wev
+    alacritty
+    ghostty
+    zellij
+    minicom
+    killall
 
-  hyprshot
-  hyprpaper
+    # lazygit
 
-  rofi-wayland
-  waybar
-  brightnessctl
-  playerctl
-  dunst
-  libnotify
-  pavucontrol
+    wev
 
-  tldr
+    hyprshot
+    hyprpaper
 
-  normcap
-  papers
-  foliate
+    rofi-wayland
+    waybar
+    brightnessctl
+    playerctl
+    dunst
+    libnotify
+    pavucontrol
+
+    tldr
+
+    normcap
+    papers
+    foliate
+
+    texliveMedium # dvipng comes with this package / smallers don't have it
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -244,7 +249,7 @@
       # Favorite apps in gnome-shell
       # [org.gnome.shell]
       # favorite-apps=['org.gnome.Console.desktop', 'org.gnome.Nautilus.desktop']
-      
+
       [org.gnome.desktop.wm.preferences]
       focus-mode='sloppy'
     '';
@@ -255,104 +260,103 @@
     ];
   };
 
-services.emacs = {
-  enable = true;
-  package = pkgs.emacs;
-};
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs;
+  };
 
-fonts.packages = with pkgs; [
-  jetbrains-mono
-  inter
-];
+  fonts.packages = with pkgs; [
+    jetbrains-mono
+    inter
+  ];
 
-services.syncthing = {
-  dataDir = "/home/berkay";
-  enable = true;
-  user = "berkay";
-};
+  services.syncthing = {
+    dataDir = "/home/berkay";
+    enable = true;
+    user = "berkay";
+  };
 
-# services.syncthing = {
-#   enable = true;
-#   openDefaultPorts = true;
-#   # user = "berkay";
-#   settings.gui = {
-#     user = "test";
-#     password = "test1";
-#   };
-#   settings = {
-#     devices = {
-#       "Oppo A72" = { id = "RNKR4XS-LASRHNE-I72ZDRJ-732LURJ-XOL3QX6-FAOLJWV-VWRYINY-L2Q5XQV"; };
-#     };
-#     # folders = {
-#     #   "sync" = {
-#     #     path = "/home/berkay/Documents/sync";
-#     #     devices = [ "Oppo A72" ];
-#     #   };
-#     #   "org" = {
-#     #     path = "/home/berkay/Documents/org";
-#     #     devices = [ "Oppo A72" ];
-#     #   };
-#     # };
-#   };
-# };
+  # services.syncthing = {
+  #   enable = true;
+  #   openDefaultPorts = true;
+  #   # user = "berkay";
+  #   settings.gui = {
+  #     user = "test";
+  #     password = "test1";
+  #   };
+  #   settings = {
+  #     devices = {
+  #       "Oppo A72" = { id = "RNKR4XS-LASRHNE-I72ZDRJ-732LURJ-XOL3QX6-FAOLJWV-VWRYINY-L2Q5XQV"; };
+  #     };
+  #     # folders = {
+  #     #   "sync" = {
+  #     #     path = "/home/berkay/Documents/sync";
+  #     #     devices = [ "Oppo A72" ];
+  #     #   };
+  #     #   "org" = {
+  #     #     path = "/home/berkay/Documents/org";
+  #     #     devices = [ "Oppo A72" ];
+  #     #   };
+  #     # };
+  #   };
+  # };
 
-services.keyd = {
-  enable = true;
-  keyboards = {
-    default = {
-      ids = ["*"];
-      settings = {
-        main = {
-          capslock = "overload(control, esc)";
-          esc = "capslock";
-	  control = "layer(nav)";
-        };
-        nav = {
-	  j = "down";
-	  k = "up";
-	  h = "left";
-	  l = "right";
-	  p = "print";
-	  n = "C-A-left";
-	  shift-n = "C-A-S-left";
-	  m = "C-A-right";
-	  shift-m = "C-A-S-right";
+  services.keyd = {
+    enable = true;
+    keyboards = {
+      default = {
+        ids = ["*"];
+        settings = {
+          main = {
+            capslock = "overload(control, esc)";
+            esc = "capslock";
+            control = "layer(nav)";
+          };
+          nav = {
+            j = "down";
+            k = "up";
+            h = "left";
+            l = "right";
+            p = "print";
+            n = "C-A-left";
+            shift-n = "C-A-S-left";
+            m = "C-A-right";
+            shift-m = "C-A-S-right";
+          };
         };
       };
     };
   };
-};
 
-swapDevices = [{
-  device = "/swapfile";
-  size = 6 * 1024; # 6GB
-}];
+  swapDevices = [{
+    device = "/swapfile";
+    size = 6 * 1024; # 6GB
+  }];
 
-nix.gc = {
-  automatic = true;
-  options = "--delete-older-than 7d";
-};
-
-nix.optimise.automatic = true;
-nix.settings.auto-optimise-store = true;
-
-programs.nix-ld.enable = true;
-programs.nix-ld.libraries = with pkgs; [
-  # Add any missing dynamic libraries for unpackaged
-  # programs here, NOT in environment.systemPackages
-];
-
-environment = {
-    sessionVariables = {
-      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
-    };
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 7d";
   };
 
-environment.gnome.excludePackages = with pkgs; [ 
-	file-roller
-	];
+  nix.optimise.automatic = true;
+  nix.settings.auto-optimise-store = true;
 
-home-manager.users.berkay = { pkgs, ... }: {
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged
+    # programs here, NOT in environment.systemPackages
+  ];
+
+  environment.sessionVariables = {
+    # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
+    GSK_RENDERER = "opengl"; # vulkan renderer causes problems
+  };
+
+  environment.gnome.excludePackages = with pkgs; [ 
+    file-roller
+  ];
+
+  home-manager.users.berkay = { pkgs, ... }: {
     home.username = "berkay";
     home.homeDirectory = "/home/berkay";
     home.stateVersion = "25.05";
@@ -360,41 +364,41 @@ home-manager.users.berkay = { pkgs, ... }: {
     programs.home-manager.enable = true;
 
     programs.zsh = {
-        enable = true;
-        enableCompletion = true;
-        autosuggestion.enable = true;
-        syntaxHighlighting.enable = true;
-    
-        shellAliases = {
-          ll = "ls -l";
-          edit = "sudo -e";
-          update = "sudo nixos-rebuild switch --flake ~/.dotfiles/.config/nixos --impure";
-        };
-    
-        history.size = 10000;
-        history.ignoreAllDups = true;
-        history.path = "$HOME/.zsh_history";
-        history.ignorePatterns = ["rm *" "pkill *" "cp *"];
+      enable = true;
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
 
-        oh-my-zsh = {
+      shellAliases = {
+        ll = "ls -l";
+        edit = "sudo -e";
+        update = "sudo nixos-rebuild switch --flake ~/.dotfiles/.config/nixos --impure --upgrade-all";
+      };
+
+      history.size = 10000;
+      history.ignoreAllDups = true;
+      history.path = "$HOME/.zsh_history";
+      history.ignorePatterns = ["rm *" "pkill *" "cp *"];
+
+      oh-my-zsh = {
         enable = true;
         plugins = ["git"];
         theme = "robbyrussell";
-        };
+      };
     };
 
     home.file.".zellij.zshrc".source = /home/berkay/.zellij.zshrc;
 
-};
+  };
 
-programs.zsh.enable = true;
-home-manager.useGlobalPkgs = true;
-users.users.berkay.shell = pkgs.zsh;
+  programs.zsh.enable = true;
+  home-manager.useGlobalPkgs = true;
+  users.users.berkay.shell = pkgs.zsh;
 
-services.udev.packages = [
-      (pkgs.writeTextFile {
-        name = "99-openfpgaloader";
-        text = ''
+  services.udev.packages = [
+    (pkgs.writeTextFile {
+      name = "99-openfpgaloader";
+      text = ''
 # Copy this file to /etc/udev/rules.d/
 
 ACTION!="add|change", GOTO="openfpgaloader_rules_end"
@@ -457,15 +461,15 @@ ATTRS{idVendor}=="1209", ATTRS{idProduct}=="3442", MODE="664", GROUP="plugdev", 
 ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55dd", MODE="664", GROUP="plugdev", TAG+="uaccess"
 
 LABEL="openfpgaloader_rules_end"
-	'';
-        destination = "/etc/udev/rules.d/99-openfpgaloader.rules";
-      })
-      (pkgs.writeTextFile {
-        name = "99-ftdi";
-        text = ''
+      '';
+      destination = "/etc/udev/rules.d/99-openfpgaloader.rules";
+    })
+    (pkgs.writeTextFile {
+      name = "99-ftdi";
+      text = ''
 ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6010", MODE="0666"
-	'';
-        destination = "/etc/udev/rules.d/99-ftdi.rules";
-      })
-    ];
+      '';
+      destination = "/etc/udev/rules.d/99-ftdi.rules";
+    })
+  ];
 }

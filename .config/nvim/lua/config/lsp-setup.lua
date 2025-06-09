@@ -10,6 +10,7 @@ require('lspconfig').verible.setup({
 
 require('lspconfig').pylsp.setup({})
 require('lspconfig').zls.setup({})
+require('lspconfig').gopls.setup({})
 
 require('lspconfig').mlir_lsp_server.setup({})
 vim.filetype.add({
