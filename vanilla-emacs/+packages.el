@@ -8,11 +8,16 @@
 ;;   :after foo   ; Load my-package after foo is loaded (seldom used)
 ;;   :init        ; Run this code before my-package is loaded
 ;;   :bind        ; Bind these keys to these functions
+;;   :hook        ; Add hooks
 ;;   :custom      ; Set these variables
 ;;   :config      ; Run this code after my-package is loaded
+;; )
 
 ;; ---------------------------------------------------------------------
 
+(load (expand-file-name "packages/llms.el" user-emacs-directory))
+
+;; ---------------------------------------------------------------------
 
 (use-package evil
   :ensure t
@@ -35,26 +40,6 @@
 
 (keymap-set evil-insert-state-map "C-g" 'evil-normal-state)
 (keymap-global-set "C-M-u" 'universal-argument)
-
-;; ---------------------------------------------------------------------------
-
-(use-package copilot
-  :ensure t
-  :vc (:fetcher github :repo copilot-emacs/copilot.el)
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("M-l" . 'copilot-accept-completion)
-              ;;("<tab>" . 'copilot-accept-completion)
-              ;;("TAB" . 'copilot-accept-completion)
-              ;;("C-TAB" . 'copilot-accept-completion-by-word)
-              ;;("C-<tab>" . 'copilot-accept-completion-by-word)
-              )
-  :config
-  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
-  (add-to-list 'copilot-indentation-alist '(org-mode 2))
-  (add-to-list 'copilot-indentation-alist '(text-mode 2))
-  (add-to-list 'copilot-indentation-alist '(closure-mode 2))
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 ;; ---------------------------------------------------------------------------
 
