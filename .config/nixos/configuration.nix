@@ -350,7 +350,8 @@
   environment.sessionVariables = {
     # LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib";
     GSK_RENDERER = "opengl"; # vulkan renderer causes problems
-  };
+  } // (builtins.fromJSON (builtins.readFile /home/berkay/.dotfiles/.config/nixos/.env)); # json file for environment variables
+  # TODO: find a way to use this file without hardcoding the path
 
   environment.gnome.excludePackages = with pkgs; [ 
     file-roller
