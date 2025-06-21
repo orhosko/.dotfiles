@@ -27,6 +27,7 @@
   (setq org-startup-folded t)
   (setq org-return-follows-link t)
   (setq org-use-sub-superscripts '{})
+  (setq org-export-with-sub-superscripts '{})
   (org-roam-db-autosync-mode))
 
 (use-package websocket
