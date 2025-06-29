@@ -132,8 +132,8 @@
 
     #rustup
 
-    go
-    gopls
+    # go
+    # gopls
 
     eww
     jq
@@ -206,6 +206,8 @@
     foliate
 
     texliveMedium # dvipng comes with this package / smallers don't have it
+
+    #appimage-run
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
