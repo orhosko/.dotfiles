@@ -3,7 +3,7 @@
   :config
   ;;; Centering Org Documents --------------------------------
   ;; Configure fill width
-  (customize-set-variable 'visual-fill-column-width 120)
+  (customize-set-variable 'visual-fill-column-width 180)
   (customize-set-variable 'visual-fill-column-center-text t))
 
 ;;; Theme and Fonts ----------------------------------------
