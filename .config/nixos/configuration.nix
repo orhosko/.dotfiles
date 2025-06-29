@@ -2,8 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
+{ config, pkgs, unstablePkgs, lib, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -47,8 +46,8 @@
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -153,10 +152,10 @@
 
     verilator
     verible
-    yosys
-    nextpnr
     openfpgaloader
     python312Packages.apycula
+    unstablePkgs.nextpnr
+    unstablePkgs.yosys
 
     python3
     python312Packages.python-lsp-server
@@ -184,7 +183,7 @@
     minicom
     killall
 
-    # lazygit
+    unstablePkgs.lazygit
 
     wev
 
@@ -205,7 +204,7 @@
     papers
     foliate
 
-    texliveMedium # dvipng comes with this package / smallers don't have it
+    # texliveMedium # dvipng comes with this package / smallers don't have it
 
     #appimage-run
   ];
@@ -242,7 +241,7 @@
   environment.variables.EDITOR = "nvim";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  services.desktopManager.gnome = {
+  services.xserver.desktopManager.gnome = {
     extraGSettingsOverrides = ''
       # Change default background
       # [org.gnome.desktop.background]
@@ -378,7 +377,7 @@
         update = "sudo nixos-rebuild switch --flake ~/.dotfiles/.config/nixos --impure --upgrade-all";
       };
 
-      history.size = 10000;
+      history.size = 100000;
       history.ignoreAllDups = true;
       history.path = "$HOME/.zsh_history";
       history.ignorePatterns = ["rm *" "pkill *" "cp *"];
