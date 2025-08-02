@@ -123,16 +123,16 @@
     "format-icons": {
       "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "on-click": "bash $HOME/.config/waybar/volume mute",
-    "on-scroll-up": "bash $HOME/.config/waybar/volume up",
-    "on-scroll-down": "bash $HOME/.config/waybar/volume down",
+    "on-click": "bash $HOME/.config/scripts/volume mute",
+    "on-scroll-up": "bash $HOME/.config/scripts/volume up",
+    "on-scroll-down": "bash $HOME/.config/scripts/volume down",
     "scroll-step": 5,
     "on-click-right": "pavucontrol"
   },
 
   "custom/theme-mode": {
     "format": "󰏘",
-    "on-click": "$HOME/.config/waybar/scripts/theme",
+    "on-click": "$HOME/.config/scripts/theme",
   },
 
   "custom/launcher": {
@@ -146,7 +146,7 @@
     "exec": "echo ''",
     "tooltip": "false",
     "exec-if": "pgrep 'wf-recorder'",
-    "on-click": "exec ./scripts/wlrecord.sh",
+    "on-click": "exec ../scripts/wlrecord.sh",
     "signal": 8
   },
 

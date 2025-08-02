@@ -115,6 +115,12 @@
 
 ;; ------------------------------------------------------------------
 
+(setq-default tab-width 4
+              indent-tabs-mode nil
+              fill-column 120)
+
+;; ------------------------------------------------------------------
+
 ;; Display messages when idle, without prompting
 (setq help-at-pt-display-when-idle t)
 
@@ -134,6 +140,7 @@
 (global-auto-revert-mode t)
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'relative)
+(setq xref-search-program 'ripgrep)
 
 (electric-pair-mode t)
 (show-paren-mode 1)
@@ -186,7 +193,7 @@
 ;; Drag-and-drop to `dired`
 ;; (add-hook 'dired-mode-hook 'org-download-enable)
 
-(set-frame-parameter (selected-frame) 'alpha '(99 . 96))
+;; (set-frame-parameter (selected-frame) 'alpha '(99 . 96))
 
 (setenv "PATH" (concat (getenv "PATH") ":/home/berkay/.local/bin:/home/berkay/bin"))
 (add-to-list 'exec-path "/home/berkay/.local/bin")

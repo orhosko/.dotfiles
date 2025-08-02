@@ -74,6 +74,7 @@
 (define-key evil-normal-state-map (kbd "SPC p c") 'project-compile)
 (define-key evil-normal-state-map (kbd "SPC p d") 'project-dired)
 (define-key evil-normal-state-map (kbd "SPC p D") 'project-find-dir)
+(define-key evil-normal-state-map (kbd "SPC p g") 'project-find-regexp)
 
 ; - SPC-s
 ;   - +search
@@ -92,12 +93,18 @@
 ;   - +code/lsp
 ;   - a: action
 ;   - r: rename
+;   - n: next error
+;   - p: previous error
+;   - f: format
 ;   - ---------
 ;   - c: compile
-;   - C: recompile or compile at root
+;   - ?C: recompile or compile at root
 (define-key evil-normal-state-map (kbd "SPC c a") 'eglot-code-action-quickfix)
 (define-key evil-normal-state-map (kbd "SPC c c") 'compile)
 (define-key evil-normal-state-map (kbd "SPC c r") 'eglot-rename)
+(define-key evil-normal-state-map (kbd "SPC c n") 'flymake-goto-next-error)
+(define-key evil-normal-state-map (kbd "SPC c p") 'flymake-goto-prev-error)
+(define-key evil-normal-state-map (kbd "SPC c f") 'eglot-format-buffer)
 
 ; - SPC--
 ;   - dired/filetree
@@ -126,3 +133,14 @@
 
 ;; <visual>gc
 (define-key evil-visual-state-map "gc" 'comment-or-uncomment-region)
+
+(defun toggle-fold ()
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (hs-toggle-hiding)))
+
+;; <normal>C-<tab>
+(define-key evil-normal-state-map (kbd "C-<tab>") 'toggle-fold)
+(define-key evil-normal-state-map (kbd "z a") 'toggle-fold)
+
