@@ -204,7 +204,7 @@
     papers
     foliate
 
-    # texliveMedium # dvipng comes with this package / smallers don't have it
+    texliveMedium # dvipng comes with this package / smallers don't have it
 
     #appimage-run
   ];
