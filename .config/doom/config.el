@@ -119,8 +119,8 @@
               ;;("C-<tab>" . 'copilot-accept-completion-by-word)
               ))
 
-;(add-to-list 'default-frame-alist '(undecorated . t))
-;(add-to-list 'default-frame-alist '(alpha . 99))
+(add-to-list 'default-frame-alist '(undecorated . t))
+;(set-frame-parameter (selected-frame) 'alpha '(97 . 99))
 
 (setq load-theme 'catppuccin)
 
@@ -132,13 +132,12 @@
   (auto-dark-mode 1))
 
 ;; Let the desktop background show through
-(set-frame-parameter (selected-frame) 'alpha '(97 . 99))
 ;; (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
 ;;; Theme and Fonts ----------------------------------------
 
        ;; Set reusable font name variables
-       (defvar my/fixed-width-font "JetBrains Mono"
+       (defvar my/fixed-width-font "JetBrains Mono Nerd Font"
        "The font to use for monospaced (fixed width) text.")
 
        (defvar my/variable-width-font "Inter"

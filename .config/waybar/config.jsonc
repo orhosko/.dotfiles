@@ -10,7 +10,7 @@
 
   "modules-left": ["custom/launcher", "niri/workspaces", "custom/playerctl", "custom/playerlabel"],
   "modules-center": ["cpu", "memory", "disk"],
-  "modules-right": ["tray", "custom/theme-mode", "network", "battery", "pulseaudio", "backlight", "clock"],
+  "modules-right": ["niri/language", "tray", "custom/theme-mode", "network", "battery", "pulseaudio", "backlight", "clock"],
 
   // Modules configuration
   "clock": {
@@ -155,5 +155,9 @@
     "on-click": "hyprpicker -a -f hex",
     "on-click-right": "hyprpicker -a -f rgb"
   },
-}
+
+ "niri/language": {
+    "format": "{short}",
+    "on-click": "niri msg action switch-layout next",
+  }, 
 }

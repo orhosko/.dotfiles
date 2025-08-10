@@ -9,6 +9,7 @@
 
 ;; (icomplete-vertical-mode 1)
 
+(setq default-frame-alist '((undecorated . t)))
 (tool-bar-mode -1) (blink-cursor-mode -1)
 (scroll-bar-mode -1) (menu-bar-mode -1) 
 (global-hl-line-mode 1)
@@ -193,7 +194,7 @@
 ;; Drag-and-drop to `dired`
 ;; (add-hook 'dired-mode-hook 'org-download-enable)
 
-;; (set-frame-parameter (selected-frame) 'alpha '(99 . 96))
+;; (set-frame-parameter (selected-frame) 'alpha '(98 . 95))
 
 (setenv "PATH" (concat (getenv "PATH") ":/home/berkay/.local/bin:/home/berkay/bin"))
 (add-to-list 'exec-path "/home/berkay/.local/bin")

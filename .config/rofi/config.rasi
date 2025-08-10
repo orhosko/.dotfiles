@@ -5,4 +5,4 @@ configuration {
     drun-history: 1;
 }
 
-@theme "sakura"
+@theme "gruvbox"
