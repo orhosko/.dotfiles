@@ -8,9 +8,11 @@
 ;   - b: switch buffer
 ;   - d: delete buffer
 ;   - D: delete this buffer
+;   - r: revert buffer
 (define-key evil-normal-state-map (kbd "SPC b b") 'switch-to-buffer) ;; +vertico/switch-workspace-buffer
 (define-key evil-normal-state-map (kbd "SPC b d") 'kill-buffer) ;; +vertico/kill-buffer)
 (define-key evil-normal-state-map (kbd "SPC b D") (lambda () (interactive) (kill-buffer (current-buffer))))
+(define-key evil-normal-state-map (kbd "SPC b r") (lambda () (interactive) (revert-buffer nil t)))
 
 ; - SPC-SPC
 ;   - find files in project
@@ -131,8 +133,9 @@
   (find-file (file-name-directory user-init-file)))
 (define-key evil-normal-state-map (kbd "SPC f c") 'find-config)
 
-;; <visual>gc
+;; <visual>gc ;; normally C-x C-;
 (define-key evil-visual-state-map "gc" 'comment-or-uncomment-region)
+(define-key evil-normal-state-map "gcc" 'comment-line)
 
 (defun toggle-fold ()
   (interactive)
@@ -144,3 +147,7 @@
 (define-key evil-normal-state-map (kbd "C-<tab>") 'toggle-fold)
 (define-key evil-normal-state-map (kbd "z a") 'toggle-fold)
 
+;; <normal>SPC-s search
+(define-key evil-normal-state-map (kbd "SPC s b") 'consult-line)
+(define-key evil-normal-state-map (kbd "SPC s g") 'consult-grep)
+(define-key evil-normal-state-map (kbd "SPC s r") 'consult-ripgrep)

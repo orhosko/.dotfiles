@@ -19,7 +19,6 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
-  (customize-set-variable 'evil-want-C-i-jump nil)
   ; (customize-set-variable 'evil-respect-visual-line-mode t)
   (customize-set-variable 'evil-want-C-h-delete t)
   (customize-set-variable'evil-want-C-u-scroll t)
