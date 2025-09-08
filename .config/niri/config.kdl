@@ -104,7 +104,8 @@ output "eDP-1" {
 }
 
 output "HDMI-A-1" {
-    mode "3440x1440@49.998"
+    mode "3440x1440@50"
+    variable-refresh-rate
 
     position x=0 y=0
 }

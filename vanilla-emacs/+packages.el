@@ -41,6 +41,15 @@
   :config
   (global-evil-surround-mode 1))
 
+(use-package evil-numbers
+  :ensure t
+  :config
+  (evil-define-key '(normal visual) 'global (kbd "C-c +") 'evil-numbers/inc-at-pt)
+  (evil-define-key '(normal visual) 'global (kbd "C-c -") 'evil-numbers/dec-at-pt)
+  (evil-define-key '(normal visual) 'global (kbd "C-c C-+") 'evil-numbers/inc-at-pt-incremental)
+  (evil-define-key '(normal visual) 'global (kbd "C-c C--") 'evil-numbers/dec-at-pt-incremental)
+)
+
 (use-package multiple-cursors
   :ensure t
   :bind(("C-S-c C-S-c" . mc/edit-lines)
@@ -274,6 +283,18 @@
 
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+
+;; ---------------------------------------------------------------------------
+
+(use-package aider
+    :ensure t
+    :config
+    (setq aider-args '("--model" "gemini" "--no-auto-accept-architect" "--no-auto-commits"))
+    (global-set-key (kbd "C-c a") 'aider-transient-menu) ;; for wider screen
+    ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
+    (aider-magit-setup-transients) ;; add aider magit function to magit menu
+    (global-auto-revert-mode 1) ;; auto revert buffer
+    (auto-revert-mode 1))
 
 ;; ---------------------------------------------------------------------------
 
