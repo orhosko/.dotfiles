@@ -126,3 +126,7 @@
 
 ;; <visual>gc
 (define-key evil-visual-state-map "gc" 'comment-or-uncomment-region)
+
+;; C-c r consult register 
+(global-set-key (kbd "C-c r r") #'consult-register)
+(global-set-key (kbd "C-c r s") #'consult-register-store)
