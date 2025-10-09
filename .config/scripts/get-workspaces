@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+if command -v hyprctl &> /dev/null; then
+    "$SCRIPT_DIR/hypr/get-workspaces"
+elif command -v niri &> /dev/null; then
+    "$SCRIPT_DIR/niri/get-workspaces"
+else
+    echo "Error: Neither hyprctl nor niri command found in PATH." >&2
+    exit 1
+fi

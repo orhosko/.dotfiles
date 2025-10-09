@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+niri msg -j query-outputs | jq '
+    map(.workspaces) | flatten | map({
+        "id": .id,
+        "name": .name,
+        "occupied": (.window_count > 0),
+        "active": .focused
+    }) | sort_by(.id)
+'

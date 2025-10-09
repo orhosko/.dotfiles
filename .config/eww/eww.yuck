@@ -8,13 +8,13 @@
 (defpoll mic_percent :interval "3s" "amixer -D pulse sget Capture | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%'")
 (defpoll brightness_percent :interval "5s" "brightnessctl -m -d intel_backlight | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
 
-(defpoll battery :interval "15s" "./scripts/battery --bat")
-(defpoll battery_status :interval "1m" "./scripts/battery --bat-st")
+(defpoll battery :interval "15s" "../scripts/battery --bat")
+(defpoll battery_status :interval "1m" "../scripts/battery --bat-st")
 
-(defpoll memory :interval "5s" "~/.config/eww/scripts/memory")
-(defpoll memory_used_mb :interval "2m" "scripts/mem-ad used")
-(defpoll memory_total_mb :interval "2m" "scripts/mem-ad total")
-(defpoll memory_free_mb :interval "2m" "scripts/mem-ad free")
+(defpoll memory :interval "5s" "../scripts/memory")
+(defpoll memory_used_mb :interval "2m" "../scripts/mem-ad used")
+(defpoll memory_total_mb :interval "2m" "../scripts/mem-ad total")
+(defpoll memory_free_mb :interval "2m" "../scripts/mem-ad free")
 (defvar vol_reveal false)
 (defvar br_reveal false)
 (defvar music_reveal false)
@@ -24,16 +24,16 @@
 (defvar eww "eww -c $HOME/.config/eww/")
 
 
-(defpoll COL_WLAN :interval "1m" "~/.config/eww/scripts/wifi --COL")
-(defpoll ESSID_WLAN :interval "1m" "~/.config/eww/scripts/wifi --ESSID")
-(defpoll WLAN_ICON :interval "1m" "~/.config/eww/scripts/wifi --ICON")
+(defpoll COL_WLAN :interval "1m" "../scripts/wifi --COL")
+(defpoll ESSID_WLAN :interval "1m" "../scripts/wifi --ESSID")
+(defpoll WLAN_ICON :interval "1m" "../scripts/wifi --ICON")
 
 
-(defpoll song :interval "2s"  "~/.config/eww/scripts/music_info --song")
-(defpoll song_artist :interval "2s"  "~/.config/eww/scripts/music_info --artist")
-(defpoll current_status :interval "1s"  "~/.config/eww/scripts/music_info --time")
-(defpoll song_status :interval "2s"  "~/.config/eww/scripts/music_info --status")
-(defpoll cover_art :interval "2s"  "~/.config/eww/scripts/music_info --cover")
+(defpoll song :interval "2s"  "../scripts/music_info --song")
+(defpoll song_artist :interval "2s"  "../scripts/music_info --artist")
+(defpoll current_status :interval "1s"  "../scripts/music_info --time")
+(defpoll song_status :interval "2s"  "../scripts/music_info --status")
+(defpoll cover_art :interval "2s"  "../scripts/music_info --cover")
 
 (defpoll calendar_day :interval "20h" "date '+%d'")
 (defpoll calendar_year :interval "20h" "date '+%Y'")
@@ -62,7 +62,7 @@
                 :class "iconbat"
                 :limit-width 2
                 :tooltip "battery on ${battery}%"
-                :onclick "$HOME/.config/eww/scripts/pop system"
+                :onclick "../scripts/eww/pop system"
                 :wrap false
                 ""))))
 
@@ -76,7 +76,7 @@
                 :class "iconmem"
                 :limit-width 2
                 :tooltip "using ${memory}% ram"
-                :onclick "$HOME/.config/eww/scripts/pop system"
+                :onclick "../scripts/eww/pop system"
                 :wrap false
                 ""))))
 
@@ -97,7 +97,7 @@
 			  :reveal time_rev
 			  :duration "350ms"
       (button :class "clock_date_class"
-             :onclick "$HOME/.config/eww/scripts/pop calendar" clock_date
+             :onclick "../scripts/eww/pop calendar" clock_date
         )
   ))))
   
@@ -140,14 +140,14 @@
 			  :onhoverlost "${eww} update music_reveal=false"
 		(box :class "module-2" :orientation "h" :space-evenly "false" :vexpand "false" :hexpand "false" 
 			(box :class "song_cover_art" :vexpand "false" :hexpand "false" :style "background-image: url('${cover_art}');")
-			(button :class "song" :wrap "true" :onclick "~/.config/eww/scripts/pop music" song)
+			(button :class "song" :wrap "true" :onclick "../scripts/eww/pop music" song)
 	    (revealer :transition "slideright"
 			      :reveal music_reveal
 			      :duration "350ms"
           (box :vexpand "false" :hexpand "false" :oreintation "h" 
-                    (button :class "song_btn_prev" :onclick "~/.config/eww/scripts/music_info --prev" "")
-					(button :class "song_btn_play" :onclick "~/.config/eww/scripts/music_info --toggle" song_status)
-					(button :class "song_btn_next" :onclick "~/.config/eww/scripts/music_info --next" ""))))))
+                    (button :class "song_btn_prev" :onclick "../scripts/music_info --prev" "")
+					(button :class "song_btn_play" :onclick "../scripts/music_info --toggle" song_status)
+					(button :class "song_btn_next" :onclick "../scripts/music_info --next" ""))))))
 
 
 
@@ -332,9 +332,9 @@
 				(label :halign "center" :class "music" :wrap "true" :limit-width 13 :text song)
 				(label :halign "center" :class "music_artist" :wrap "true" :limit-width 15 :text song_artist)
 				(box :orientation "h" :spacing 15 :halign "center" :space-evenly "false" :vexpand "false" :hexpand "false"
-					(button :class "music_btn_prev" :onclick "~/.config/eww/scripts/music_info --prev" "")
-					(button :class "music_btn_play" :onclick "~/.config/eww/scripts/music_info --toggle" song_status)
-					(button :class "music_btn_next" :onclick "~/.config/eww/scripts/music_info --next" ""))
+					(button :class "music_btn_prev" :onclick "../scripts/music_info --prev" "")
+					(button :class "music_btn_play" :onclick "../scripts/music_info --toggle" song_status)
+					(button :class "music_btn_next" :onclick "../scripts/music_info --next" ""))
 				(box :class "music_bar" :halign "center" :vexpand "false" :hexpand "false" :space-evenly "false"
 					(scale :onscroll "mpc -q seek {}" :min 0 :active "true" :max 100 :value current_status)))))
 
@@ -346,15 +346,15 @@
 			    :geometry (geometry :x "0" :y "7%" :width 428 :height 104 :anchor "top center")
 			     				(music_pop))
 
-(deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
-(deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
+(deflisten workspaces :initial "[]" "../scripts/get-workspaces")
+(deflisten current_workspace :initial "1" "../scripts/get-active-workspace")
 
 (defwidget workspaces []
-  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
+  (eventbox :onscroll "../scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
     (box :space-evenly true
       (label :text "${workspaces}${current_workspace}" :visible false)
       (for workspace in workspaces
-        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (eventbox :onclick "../scripts/change-active-workspace ${workspace.id}"
           (box :class "workspace-entry ${workspace.windows > 0 ? "occupied" : "empty"}"
            (label :text "${workspace.id != "10" ? workspace.id : "0"}" :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""}" )
             )
@@ -364,13 +364,13 @@
     )
   )
 
-(deflisten theme :initial "dark" "~/.config/eww/scripts/theme --get")
+(deflisten theme :initial "dark" "../scripts/theme --get")
 (defwidget theme-toggle []
   (box 
   :class "theme_module" :vexpand "false" :hexpand "false" 
   (button
     :class "theme-button"
-    :onclick "eww update theme=$(~/.config/eww/scripts/theme)"
+    :onclick "eww update theme=$(../scripts/theme)"
     :tooltip "Toggle Dark/Light Mode"
     (label :text "${theme == "dark" ? "" : ""}")))
 )

@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+# Helper function to clamp a number within a min/max range.
+clamp() {
+    local min=$1 max=$2 val=$3
+    (( val > max )) && val=$max
+    (( val < min )) && val=$min
+    echo "$val"
+}
+
+# --- Main Logic ---
+target=0
+
+if [[ $# -eq 1 ]]; then
+    # Case 1: One argument provided (e.g., "7")
+    # This is a direct jump to a specific workspace.
+    if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+        echo "Error: Workspace ID must be a number." >&2
+        exit 1
+    fi
+    target=$(clamp 1 10 "$1")
+
+elif [[ $# -eq 2 ]]; then
+    # Case 2: Two arguments provided (e.g., "down 3")
+    # This is for relative up/down movement.
+    direction=$1
+    current=$2
+    if ! [[ "$current" =~ ^[0-9]+$ ]]; then
+        echo "Error: Current workspace ID must be a number." >&2
+        exit 1
+    fi
+
+    if [[ "$direction" == "down" ]]; then
+        target=$(clamp 1 10 $((current + 1)))
+    elif [[ "$direction" == "up" ]]; then
+        target=$(clamp 1 10 $((current - 1)))
+    else
+        echo "Error: Invalid direction '$direction'. Use 'up' or 'down'." >&2
+        exit 1
+    fi
+
+    # Exit if we are already at the boundary and not moving.
+    if [[ "$current" -eq "$target" ]]; then
+        exit 0
+    fi
+else
+    # Case 3: Invalid number of arguments
+    echo "Usage: $0 <workspace_id>" >&2
+    echo "   or: $0 <up|down> <current_workspace_id>" >&2
+    exit 1
+fi
+
+# --- Compositor-Specific Execution ---
+# This block runs for both one and two-argument cases.
+if command -v hyprctl &> /dev/null; then
+    hyprctl dispatch workspace "$target"
+elif command -v niri &> /dev/null; then
+    niri msg focus-workspace "$target"
+else
+    echo "Error: Neither hyprctl nor niri command found in PATH." >&2
+    exit 1
+fi
