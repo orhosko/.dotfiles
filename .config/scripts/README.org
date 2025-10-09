@@ -1,4 +1,0 @@
-* Programs
-- mpc
-- ffmpeg
-- nmcli

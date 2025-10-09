@@ -189,8 +189,11 @@
 
     alacritty
     ghostty
-    zellij
+
+    # zellij
+    tmux
     minicom
+
     killall
 
     unstablePkgs.lazygit
@@ -205,6 +208,7 @@
     brightnessctl
     playerctl
     dunst
+    mako
     libnotify
     pavucontrol
 
