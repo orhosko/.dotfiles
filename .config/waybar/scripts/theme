@@ -15,6 +15,18 @@ if [[ "$1" == "--get" ]]; then
     exit
 fi
 
+if [[ "$1" == "--toggle" ]]; then
+    current=$(get_theme)
+    if [[ "$current" == "dark" ]]; then
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+        echo "light"
+    else
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+        echo "dark"
+    fi
+    exit
+fi
+
 # toggle theme
 if [[ "$(get_theme)" == "dark" ]]; then
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'

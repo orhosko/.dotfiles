@@ -25,7 +25,7 @@
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
   (customize-set-variable 'evil-want-C-i-jump nil)
-  (customize-set-variable 'evil-respect-visual-line-mode t)
+  ; (customize-set-variable 'evil-respect-visual-line-mode t)
   (customize-set-variable 'evil-want-C-h-delete t)
   (customize-set-variable'evil-want-C-u-scroll t)
   :config
@@ -301,3 +301,20 @@
   :config
   (verilog-ext-mode-setup)
   (define-key verilog-mode-map (kbd ";") 'self-insert-command))
+
+(use-package org-download
+  :ensure t)
+(add-hook 'dired-mode-hook 'org-download-enable)
+
+(use-package ob-mermaid
+  :ensure t
+  :after org
+  :config
+  (setq ob-mermaid-cli-path "mmdc")
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((mermaid . t)
+     (scheme . t)
+     ;(your-other-langs . t)
+     ))
+  )

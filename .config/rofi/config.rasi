@@ -1,0 +1,8 @@
+configuration {
+    show-icons: true;
+    display-run: ">_";
+    sort: true;
+    drun-history: 1;
+}
+
+@theme "sakura"

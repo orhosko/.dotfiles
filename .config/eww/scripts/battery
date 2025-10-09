@@ -1,4 +1,5 @@
-#!/run/current-system/sw/bin/bash
+#!/usr/bin/env bash
+set -e
 
 battery() {
 	BAT=`ls /sys/class/power_supply | grep BAT | head -n 1`
