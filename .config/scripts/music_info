@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 ## Get data
 STATUS="$(mpc status)"

@@ -119,8 +119,8 @@
               ;;("C-<tab>" . 'copilot-accept-completion-by-word)
               ))
 
-;(add-to-list 'default-frame-alist '(undecorated . t))
-;(add-to-list 'default-frame-alist '(alpha . 99))
+(add-to-list 'default-frame-alist '(undecorated . t))
+;(set-frame-parameter (selected-frame) 'alpha '(97 . 99))
 
 (setq load-theme 'catppuccin)
 
@@ -132,20 +132,19 @@
   (auto-dark-mode 1))
 
 ;; Let the desktop background show through
-(set-frame-parameter (selected-frame) 'alpha '(97 . 99))
 ;; (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
 ;;; Theme and Fonts ----------------------------------------
 
        ;; Set reusable font name variables
-       (defvar my/fixed-width-font "JetBrains Mono"
+       (defvar my/fixed-width-font "JetBrains Mono Nerd Font"
        "The font to use for monospaced (fixed width) text.")
 
        (defvar my/variable-width-font "Inter"
        "The font to use for variable-pitch (document) text.")
 
 ; NOTE: These settings might not be ideal for your machine, tweak them as needed!
-       (set-face-attribute 'default nil :font my/fixed-width-font :weight 'light :height 100)
+       (set-face-attribute 'default nil :font my/fixed-width-font :weight 'light :height 105)
        (set-face-attribute 'fixed-pitch nil :font my/fixed-width-font :weight 'light :height 110)
        (set-face-attribute 'variable-pitch nil :font my/variable-width-font :weight 'light :height 1.1)
 

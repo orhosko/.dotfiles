@@ -1,16 +1,16 @@
 * {
-    color0: #33333f;
-    color1: #ff568e;
-    color2: #64de83;
-    color3: #efff73;
-    color4: #73a9ff;
-    color5: #946ff7;
-    color6: #62c6da;
-    color7: #dedeef;
+    color0: #88A78F;
+    color1: #636657;
+    color2: #3A382F;
+    color3: #292928;
+    color4: #4E4943;
+    color5: #55531E;
+    color6: #778E6A;
+    color7: #7D8021;
 
     bg: #101017f0;
     bg-alt: #1f222e;
-    fg: #bdc3c7;
+    fg: #cdd3d7;
 
     color: @fg;
     background-color: transparent;

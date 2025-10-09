@@ -10,7 +10,7 @@
 
   "modules-left": ["custom/launcher", "niri/workspaces", "custom/playerctl", "custom/playerlabel"],
   "modules-center": ["cpu", "memory", "disk"],
-  "modules-right": ["tray", "custom/theme-mode", "network", "battery", "pulseaudio", "backlight", "clock"],
+  "modules-right": ["niri/language", "tray", "custom/theme-mode", "network", "battery", "pulseaudio", "backlight", "clock"],
 
   // Modules configuration
   "clock": {
@@ -123,16 +123,16 @@
     "format-icons": {
       "default": ["󰕿", "󰖀", "󰕾"]
     },
-    "on-click": "bash $HOME/.config/waybar/volume mute",
-    "on-scroll-up": "bash $HOME/.config/waybar/volume up",
-    "on-scroll-down": "bash $HOME/.config/waybar/volume down",
+    "on-click": "bash $HOME/.config/scripts/volume mute",
+    "on-scroll-up": "bash $HOME/.config/scripts/volume up",
+    "on-scroll-down": "bash $HOME/.config/scripts/volume down",
     "scroll-step": 5,
     "on-click-right": "pavucontrol"
   },
 
   "custom/theme-mode": {
     "format": "󰏘",
-    "on-click": "$HOME/.config/waybar/scripts/theme",
+    "on-click": "$HOME/.config/scripts/theme",
   },
 
   "custom/launcher": {
@@ -146,7 +146,7 @@
     "exec": "echo ''",
     "tooltip": "false",
     "exec-if": "pgrep 'wf-recorder'",
-    "on-click": "exec ./scripts/wlrecord.sh",
+    "on-click": "exec ../scripts/wlrecord.sh",
     "signal": 8
   },
 
@@ -155,5 +155,9 @@
     "on-click": "hyprpicker -a -f hex",
     "on-click-right": "hyprpicker -a -f rgb"
   },
-}
+
+ "niri/language": {
+    "format": "{short}",
+    "on-click": "niri msg action switch-layout next",
+  }, 
 }

@@ -9,8 +9,8 @@
 }
 
 window#waybar {
-    background: rgba(30, 30, 46, 0.5);
-    border-bottom: 1px solid #282828;
+    background: rgba(30, 30, 46, 0.3);
+    border-bottom: 2px solid #282828;
     color: #f4d9e1
 }
 
@@ -64,7 +64,7 @@ window#waybar {
 	padding: 5px 10px;
 }
 
-#tray, #battery, #backlight, #pulseaudio, #network, #custom-theme-mode{
+#language, #tray, #battery, #backlight, #pulseaudio, #network, #custom-theme-mode{
     background: #282828;
     margin: 5px 5px 5px 5px;
     border-radius: 16px;
@@ -72,7 +72,7 @@ window#waybar {
     /*border-right: solid 1px #282738;*/
 }
 
- #network, #custom-theme-mode {
+#language, #network, #custom-theme-mode {
     padding: 0px 10px;
 }
 

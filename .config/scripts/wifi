@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 status=$(nmcli g | grep -oE "disconnected")
 essid=$(nmcli c | grep wlo1 | awk '{print ($1)}')
@@ -23,4 +22,3 @@ elif [[ "$1" == "--ESSID" ]]; then
 elif [[ "$1" == "--ICON" ]]; then
 	echo $icon
 fi
-

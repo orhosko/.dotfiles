@@ -24,11 +24,11 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
-  (customize-set-variable 'evil-want-C-i-jump nil)
   ; (customize-set-variable 'evil-respect-visual-line-mode t)
   (customize-set-variable 'evil-want-C-h-delete t)
   (customize-set-variable'evil-want-C-u-scroll t)
   :config
+  (setq evil-kill-on-visual-paste nil)
   (evil-mode 1)
   (evil-set-undo-system 'undo-redo))
 
@@ -40,6 +40,52 @@
 
 (keymap-set evil-insert-state-map "C-g" 'evil-normal-state)
 (keymap-global-set "C-M-u" 'universal-argument)
+
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
+(use-package evil-numbers
+  :ensure t
+  :config
+  (evil-define-key '(normal visual) 'global (kbd "C-c +") 'evil-numbers/inc-at-pt)
+  (evil-define-key '(normal visual) 'global (kbd "C-c -") 'evil-numbers/dec-at-pt)
+  (evil-define-key '(normal visual) 'global (kbd "C-c C-+") 'evil-numbers/inc-at-pt-incremental)
+  (evil-define-key '(normal visual) 'global (kbd "C-c C--") 'evil-numbers/dec-at-pt-incremental)
+)
+
+(use-package multiple-cursors
+  :ensure t
+  :bind(("C-S-c C-S-c" . mc/edit-lines)
+        ("C->" . mc/mark-next-like-this)
+        ("C-<" . mc/mark-previous-like-this)
+        ("C-c C-<" . mc/mark-all-like-this)
+        ("C-c m n" . mc/insert-numbers))
+  :config
+  (setq mc/insert-numbers-default 1)
+)
+
+;; ---------------------------------------------------------------------------
+
+(use-package copilot
+  :ensure t
+  :vc (:fetcher github :repo copilot-emacs/copilot.el)
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("M-l" . 'copilot-accept-completion)
+              ;;("<tab>" . 'copilot-accept-completion)
+              ;;("TAB" . 'copilot-accept-completion)
+              ;;("C-TAB" . 'copilot-accept-completion-by-word)
+              ;;("C-<tab>" . 'copilot-accept-completion-by-word)
+              )
+  :config
+  (add-to-list 'copilot-indentation-alist '(prog-mode 4))
+  (add-to-list 'copilot-indentation-alist '(c++-mode 4))
+  (add-to-list 'copilot-indentation-alist '(org-mode 2))
+  (add-to-list 'copilot-indentation-alist '(text-mode 2))
+  (add-to-list 'copilot-indentation-alist '(closure-mode 2))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 ;; ---------------------------------------------------------------------------
 
@@ -117,6 +163,13 @@
   (define-key flymake-mode-map (kbd "C-c n") #'flymake-goto-next-error)
   (define-key flymake-mode-map (kbd "C-c p") #'flymake-goto-prev-error))
 
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (hs-minor-mode 1)
+            (setq-local flymake-start-on-flymake-mode nil) ;; Don't start flymake automatically
+            (setq-local flymake-start-on-save-buffer nil) ;; Don't start flymake on save
+            (flymake-mode 1))) ;; Enable flymake mode
+
 ;;; DAP Support
 (use-package dape
   :ensure t
@@ -135,12 +188,26 @@
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 )
 
+(use-package dtrt-indent
+  :ensure t
+  :hook (prog-mode . dtrt-indent-mode))
+
+(use-package ultra-scroll
+  ;:load-path "~/code/emacs/ultra-scroll" ; if you git clone'd instead of using vc
+  ;:vc (:repo "https://github.com/jdtsmith/ultra-scroll") ; For Emacs>=30
+  :init
+  (setq scroll-conservatively 3 ; or whatever value you prefer, since v0.4
+        scroll-margin 0)        ; important: scroll-margin>0 not yet supported
+  :config
+  (ultra-scroll-mode 1))
+
 (use-package crdt
   :ensure t)
 
 (use-package tabspaces
   :ensure t
   :config
+  (setq tab-bar-select-tab-modifiers '(meta))
   (tabspaces-mode)
   (define-key evil-normal-state-map (kbd "SPC TAB ,") 'tabspaces-switch-to-buffer)
   (define-key evil-normal-state-map (kbd "SPC TAB b") 'tabspaces-switch-to-buffer)
@@ -224,8 +291,20 @@
 
 ;; ---------------------------------------------------------------------------
 
+(use-package aider
+    :ensure t
+    :config
+    (setq aider-args '("--model" "gemini" "--no-auto-accept-architect" "--no-auto-commits"))
+    (global-set-key (kbd "C-c a") 'aider-transient-menu) ;; for wider screen
+    ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
+    (aider-magit-setup-transients) ;; add aider magit function to magit menu
+    (global-auto-revert-mode 1) ;; auto revert buffer
+    (auto-revert-mode 1))
+
+;; ---------------------------------------------------------------------------
+
 ;; Add extra context to Emacs documentation to help make it easier to
-;; search and understand. This configuration uses the keybindings 
+;; search and understand. This configuration uses the keybindings
 ;; recommended by the package author.
 (use-package helpful
   :ensure t
@@ -318,3 +397,6 @@
      ;(your-other-langs . t)
      ))
   )
+
+;; TODO: find a way to both support c and c++ modes
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))

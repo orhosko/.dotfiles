@@ -1,5 +1,3 @@
-# vim.cmd.colorscheme('shine')
-
 vim.g.have_nerd_font = true
 
 vim.opt.number = true

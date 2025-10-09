@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 active=$(pacmd list-sources | awk 'c&&!--c;/* index*/{c=1}' | awk '{gsub(/<|>/,"",$0); print $NF}')
 
@@ -33,4 +32,3 @@ else
 	name="$(zenity --entry --text "enter a filename")"
 	perl-rename "s/\.(mkv|mp4)$/ $name $&/" $(ls -d $HOME/Videos/wf-recorder/* -t | head -n1)
 fi
-

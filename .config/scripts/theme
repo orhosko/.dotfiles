@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 get_theme() {
     current=$(gsettings get org.gnome.desktop.interface color-scheme)

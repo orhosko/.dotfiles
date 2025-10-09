@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 calendar() {
 LOCK_FILE="$HOME/.cache/eww-calendar.lock"
