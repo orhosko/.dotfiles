@@ -81,6 +81,11 @@
     #media-session.enable = true;
   };
 
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs-pgtk;
+  };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -110,6 +115,10 @@
     man-pages
     man-pages-posix
 
+    btop
+
+    fastfetch
+
     neovim
     tree-sitter
     wl-clipboard
@@ -121,7 +130,6 @@
 
     google-chrome
 
-    emacs
     fd
 
     ripgrep
@@ -133,6 +141,8 @@
 
     # go
     # gopls
+
+    openfortivpn
 
     eww
     jq
@@ -259,11 +269,6 @@
       pkgs.gsettings-desktop-schemas # for org.gnome.desktop
       # pkgs.gnome.gnome-shell # for org.gnome.shell
     ];
-  };
-
-  services.emacs = {
-    enable = true;
-    package = pkgs.emacs;
   };
 
   fonts.packages = with pkgs; [
@@ -396,6 +401,10 @@
   programs.zsh.enable = true;
   home-manager.useGlobalPkgs = true;
   users.users.berkay.shell = pkgs.zsh;
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "broadcom-sta-6.30.223.271-57-6.12.40"
+  ];
 
   services.udev.packages = [
     (pkgs.writeTextFile {
