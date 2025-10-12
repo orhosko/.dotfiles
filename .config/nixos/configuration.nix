@@ -56,6 +56,7 @@
   };
 
   programs.hyprland.enable = true;
+  programs.niri.enable = true;
 
   programs.nautilus-open-any-terminal = {
     enable = true;
@@ -119,7 +120,8 @@
 
     fastfetch
 
-    neovim
+    unstablePkgs.neovim
+    #neovide
     tree-sitter
     wl-clipboard
     lua-language-server
@@ -157,14 +159,14 @@
     gdb
     llvmPackages_20.bintools-unwrapped
 
-    zig
-    zls
+    # zig
+    # zls
 
     verilator
     verible
     openfpgaloader
-    python312Packages.apycula
-    unstablePkgs.nextpnr
+    python313Packages.apycula
+    nextpnr
     unstablePkgs.yosys
 
     python3
@@ -177,7 +179,7 @@
     gnumake
     ninja
     boost
-    bazel
+    # bazel
 
     # warp-terminal
 
@@ -211,6 +213,7 @@
     mako
     libnotify
     pavucontrol
+    swaybg
 
     tldr
 
@@ -222,6 +225,25 @@
 
     #appimage-run
   ];
+
+  systemd.user.services.swaybg = {
+    unitConfig = {
+      Description = "Set Sway/Wayland background image";
+      PartOf = "graphical-session.target";
+      After = "graphical-session.target";
+      Requisite = "graphical-session.target";
+    };
+
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''
+        ${pkgs.swaybg}/bin/swaybg -m fill -i %h/Pictures/Wallpapers/0.png
+      '';
+      Restart = "on-failure";
+    };
+
+    wantedBy = [ "graphical-session.target" ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -408,6 +430,8 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "broadcom-sta-6.30.223.271-57-6.12.40"
+    "broadcom-sta-6.30.223.271-57-6.12.50"
+    "broadcom-sta-6.30.223.271-57-6.12.51"
   ];
 
   services.udev.packages = [

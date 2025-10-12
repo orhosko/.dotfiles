@@ -12,6 +12,8 @@
            (file+olp+datetree "journal.org")
            "* %U %?\n%i\n%a" :prepend t)))
 
+(setq org-todo-keywords
+      '((sequence "TODO" "NEXT" "WAITING" "|" "DONE" "CANCELED")))
 
 ;;; Outline-based notes management and organizer
 ;(global-set-key (kbd "C-c l") #'org-store-link)
