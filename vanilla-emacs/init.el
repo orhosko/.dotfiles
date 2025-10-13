@@ -191,6 +191,16 @@
 
 ;; ---------------------------------------------------------------------------
 
+;; Enable .dir-locals.el variables for remote files
+(setq enable-remote-dir-locals t)
+
+;; ---------------------------------------------------------------------------
+
+;; Don't make project.el search submodules for project roots.
+;; (setq project-vc-merge-submodules nil)
+
+;; ---------------------------------------------------------------------------
+
 ;; Drag-and-drop to `dired`
 ;; (add-hook 'dired-mode-hook 'org-download-enable)
 
