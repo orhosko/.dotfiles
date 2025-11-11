@@ -333,6 +333,9 @@
   :after eglot
   :ensure t)
 
+(use-package protobuf-mode
+  :ensure t)
+
 (use-package markdown-mode
   :ensure t
   :hook ((markdown-mode . visual-line-mode)

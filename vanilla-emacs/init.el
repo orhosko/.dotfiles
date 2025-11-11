@@ -143,7 +143,7 @@
 (setq display-line-numbers-type 'relative)
 (setq xref-search-program 'ripgrep)
 
-(electric-pair-mode t)
+;; (electric-pair-mode t)
 (show-paren-mode 1)
 
 (setq confirm-kill-emacs #'y-or-n-p)
