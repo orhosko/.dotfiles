@@ -264,10 +264,7 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// NOTE: currently using systemctl but may change to this in future
-// This line starts waybar, a commonly used bar for Wayland compositors.
-
-// spawn-at-startup "waybar"
+spawn-at-startup "waybar"
 
 spawn-at-startup "~/bin/pause_on_disconnect.sh"
 spawn-at-startup "~/bin/em"
