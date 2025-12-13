@@ -155,3 +155,9 @@
 ;; C-c r consult register 
 (global-set-key (kbd "C-c r r") #'consult-register)
 (global-set-key (kbd "C-c r s") #'consult-register-store)
+
+;; ---------------------------------------------------------------
+
+;; evil repeat settings for flymake
+(evil-set-command-properties 'flymake-goto-next-error :repeat nil)
+(evil-set-command-properties 'flymake-goto-prev-error :repeat nil)
