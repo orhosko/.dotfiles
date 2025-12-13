@@ -3,3 +3,5 @@ vanilla-emacs/*
 !vanilla-emacs/+*
 !vanilla-emacs/modes/
 !vanilla-emacs/packages/
+.ssh/
+!.ssh/config
