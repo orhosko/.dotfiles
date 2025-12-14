@@ -294,7 +294,7 @@
 (use-package aider
     :ensure t
     :config
-    (setq aider-args '("--model" "gemini" "--no-auto-accept-architect" "--no-auto-commits"))
+    ;; (setq aider-args '("--model" "gpt-5-codex" "--no-auto-accept-architect" "--no-auto-commits")) :: use .aider.config.yaml instead
     (global-set-key (kbd "C-c a") 'aider-transient-menu) ;; for wider screen
     ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
     (aider-magit-setup-transients) ;; add aider magit function to magit menu

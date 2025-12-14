@@ -3,6 +3,8 @@
 ;  - belki emacs mode kullanırssak bir gün SPC ve SPC-m yerine C-x(leader) ve C-c(localleader)
 ; - Ctrl
 
+(define-key evil-normal-state-map "Y" (kbd "y$")) ;; Neovim also does that by default, not vi compatible
+
 ; - spc-b
 ;   - +buffer
 ;   - b: switch buffer
