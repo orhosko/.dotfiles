@@ -1,0 +1,15 @@
+max-visible=3
+anchor=top-right
+
+icons=1
+markup=1
+
+padding=10
+
+background-color=#282828ee
+progress-color=#ebdbb2
+text-color=#f4d9e1
+
+border-color=#292928
+border-size=2
+border-radius=4
