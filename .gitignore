@@ -1,7 +1,7 @@
-vanilla-emacs/*
-!vanilla-emacs/init.el
-!vanilla-emacs/+*
-!vanilla-emacs/modes/
-!vanilla-emacs/packages/
+.config/emacs-vanilla/*
+!.config/emacs-vanilla/init.el
+!.config/emacs-vanilla/+*
+!.config/emacs-vanilla/modes/
+!.config/emacs-vanilla/packages/
 .ssh/
 !.ssh/config

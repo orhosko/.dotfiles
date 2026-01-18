@@ -8,11 +8,11 @@
 
 ;;; Theme and Fonts ----------------------------------------
 
-       ;; Set reusable font name variables
-       (defvar my/fixed-width-font "JetBrains Mono"
+       ;; ;; Set reusable font name variables
+       (defvar my/fixed-width-font "JetBrains Mono Nerd Font"
        "The font to use for monospaced (fixed width) text.")
 
-       (defvar my/variable-width-font "Inter"
+       (defvar my/variable-width-font "Adwaita Sans"
        "The font to use for variable-pitch (document) text.")
 
 ; NOTE: These settings might not be ideal for your machine, tweak them as needed!
