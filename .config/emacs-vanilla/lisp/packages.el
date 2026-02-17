@@ -15,7 +15,7 @@
 
 ;; ---------------------------------------------------------------------
 
-(load (expand-file-name "packages/llms.el" user-emacs-directory))
+; (load (expand-file-name "packages/llms.el" user-emacs-directory))
 
 ;; ---------------------------------------------------------------------
 
@@ -28,6 +28,9 @@
   (customize-set-variable 'evil-want-C-h-delete t)
   (customize-set-variable'evil-want-C-u-scroll t)
   :config
+  (keymap-set evil-insert-state-map "C-g" 'evil-normal-state)
+  (keymap-global-set "C-M-u" 'universal-argument)
+
   (setq evil-kill-on-visual-paste nil)
   (evil-mode 1)
   (evil-set-undo-system 'undo-redo))
@@ -37,9 +40,6 @@
   :ensure t
   :config
   (evil-collection-init))
-
-(keymap-set evil-insert-state-map "C-g" 'evil-normal-state)
-(keymap-global-set "C-M-u" 'universal-argument)
 
 (use-package evil-surround
   :ensure t
@@ -70,7 +70,6 @@
 
 (use-package copilot
   :ensure t
-  :vc (:fetcher github :repo copilot-emacs/copilot.el)
   :hook (prog-mode . copilot-mode)
   :bind (:map copilot-completion-map
               ("M-l" . 'copilot-accept-completion)
@@ -104,14 +103,14 @@
   (read-buffer-completion-ignore-case t)
   (read-file-name-completion-ignore-case t)
   (completion-styles '(basic substring partial-completion flex))
-  :init
-  (vertico-mode))
+  :config
+  (vertico-mode 1))
 
 (use-package marginalia
   :ensure t
   :after vertico
-  :init
-  (marginalia-mode))
+  :config
+  (marginalia-mode 1))
 
 ;; ---------------------------------------------------------------------------
 
@@ -136,17 +135,25 @@
 ;; solution.
 (use-package corfu
   :ensure t
-  :init
-  (global-corfu-mode)
   :custom
   (corfu-auto t)
   :config
+  (global-corfu-mode 1)
   (setq text-mode-ispell-word-completion nil)
   ;; You may want to play with delay/prefix/styles to suit your preferences.
   ;; (corfu-auto-delay 0)
   ;; (corfu-auto-prefix 0)
   ;; (completion-styles '(basic))
   )
+
+(use-package corfu-terminal
+  :ensure t
+  :config
+  (setq text-mode-ispell-word-completion nil)
+  (unless (display-graphic-p)
+    (corfu-terminal-mode +1))
+  )
+
 
 ;; ---------------------------------------------------------------------------
 
@@ -261,6 +268,7 @@
   :ensure t
   :hook (org-mode . org-modern-mode)
   :custom
+  (global-org-modern-mode)
   (org-modern-list '((?+ . "➕") (?* . "➤") (?- . "➖"))))
 
 (modify-all-frames-parameters
@@ -272,8 +280,6 @@
   (face-spec-reset-face face)
   (set-face-foreground face (face-attribute 'default :background)))
 (set-face-background 'fringe (face-attribute 'default :background))
-
-(global-org-modern-mode)
 
 (use-package orderless
   :ensure t
@@ -403,3 +409,5 @@
 
 ;; TODO: find a way to both support c and c++ modes
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+(provide 'packages)

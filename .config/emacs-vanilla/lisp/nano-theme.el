@@ -152,3 +152,5 @@
 
 (nano-install-theme)
 (nano-dark)
+
+(provide 'nano-theme)

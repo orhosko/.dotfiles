@@ -118,3 +118,5 @@
 (use-package org-appear
   :ensure t
   :hook (org-mode . org-appear-mode))
+
+(provide 'present)

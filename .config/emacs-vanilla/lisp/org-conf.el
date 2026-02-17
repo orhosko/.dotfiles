@@ -170,3 +170,5 @@
     (when (and (bound-and-true-p evil-local-mode)
                (not (evil-emacs-state-p)))
       (evil-insert 1))))
+
+(provide 'org-conf)
