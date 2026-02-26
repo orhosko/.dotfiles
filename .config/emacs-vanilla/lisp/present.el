@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 (use-package visual-fill-column
   :ensure t
   :config

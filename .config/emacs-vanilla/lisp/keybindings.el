@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 ; a unified keybindings(doom inspired):
 ; - SPC leader
 ;  - belki emacs mode kullanırssak bir gün SPC ve SPC-m yerine C-x(leader) ve C-c(localleader)

@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 ; TODO: maybe try aider.el and ellama
 
 (use-package copilot

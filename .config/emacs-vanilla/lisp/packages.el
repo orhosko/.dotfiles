@@ -1,3 +1,5 @@
+;;; -*- lexical-binding: t; -*-
+
 ;; ---------------------------------------------------------------------------
 
 ;; A quick primer on the `use-package' function (refer to
