@@ -64,7 +64,7 @@ window#waybar {
 	padding: 5px 10px;
 }
 
-#language, #tray, #battery, #backlight, #pulseaudio, #network, #custom-theme-mode{
+#language, #tray, #battery, #backlight, #pulseaudio, #network, #power-profiles-daemon, #idle_inhibitor, #custom-theme-mode{
     background: #282828;
     margin: 5px 5px 5px 5px;
     border-radius: 16px;

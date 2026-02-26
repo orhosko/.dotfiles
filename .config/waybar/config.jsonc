@@ -9,8 +9,28 @@
   "margin-right": 0,
 
   "modules-left": ["custom/launcher", "niri/workspaces", "custom/playerctl", "custom/playerlabel"],
-  "modules-center": ["cpu", "memory", "disk"],
-  "modules-right": ["niri/language", "tray", "custom/theme-mode", "network", "battery", "pulseaudio", "backlight", "clock"],
+  "modules-center": ["cpu", "memory", "power-profiles-daemon"],
+  "modules-right": ["niri/language", "tray", "custom/theme-mode", "network", "battery", "pulseaudio", "idle_inhibitor", "backlight", "clock"],
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+
+  "power-profiles-daemon": {
+    "format": " {icon}   {profile} ",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": "",
+      "power-saver": ""
+    }
+  },
 
   // Modules configuration
   "clock": {
