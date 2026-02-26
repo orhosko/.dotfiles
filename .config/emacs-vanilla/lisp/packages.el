@@ -24,11 +24,13 @@
 (use-package evil
   :ensure t
   :init
-  (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  ; (customize-set-variable 'evil-respect-visual-line-mode t)
+  (setq evil-want-integration t)           ; necessary for evil-collection
+  (setq evil-want-keybinding nil)          ; necessary for evil-collection
+  (setq evil-want-Y-yank-to-eol t)         ; like neovim
+  (setq evil-want-fine-undo t)
   (customize-set-variable 'evil-want-C-h-delete t)
-  (customize-set-variable'evil-want-C-u-scroll t)
+  (customize-set-variable 'evil-want-C-u-scroll t)
+  ; (customize-set-variable 'evil-respect-visual-line-mode t)
   :config
   (keymap-set evil-insert-state-map "C-g" 'evil-normal-state)
   (keymap-global-set "C-M-u" 'universal-argument)
@@ -148,8 +150,11 @@
   ;; (completion-styles '(basic))
   )
 
+(defvar corfu-terminal-mode)
+
 (use-package corfu-terminal
   :ensure t
+  :defines (corfu-terminal-mode)
   :config
   (setq text-mode-ispell-word-completion nil)
   (unless (display-graphic-p)
@@ -256,7 +261,7 @@
  ;; Edit settings
  org-auto-align-tags nil
  org-tags-column 0
- org-catch-invisible-edits 'show-and-error
+ org-fold-catch-invisible-edits 'show-and-error
  org-special-ctrl-a/e t
  org-insert-heading-respect-content t
 
@@ -292,6 +297,7 @@
 (use-package pdf-tools
     :ensure t
     :config
+    (require 'pdf-occur)
     (pdf-tools-install))
 
 (add-hook 'text-mode-hook #'flyspell-mode)

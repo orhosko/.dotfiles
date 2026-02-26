@@ -8,8 +8,6 @@
 (use-package evil
   :config
 
-  (define-key evil-normal-state-map "Y" (kbd "y$")) ;; Neovim also does that by default, not vi compatible
-
   ;; - spc-b
   ;;   - +buffer
   ;;   - b: switch buffer

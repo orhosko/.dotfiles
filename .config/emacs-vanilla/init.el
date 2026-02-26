@@ -1,60 +1,37 @@
-(setq init-start-time (current-time))
-
-;; ---------------------------------------------------------------------------
-
-(setq gc-cons-threshold 100000000) ; 100 mb
-(setq read-process-output-max (* 1024 1024)) ; 1mb
-
-;; --- Activate / Deactivate modes --------------------------------------------
-
-;; (icomplete-vertical-mode 1)
-
-(setq default-frame-alist '((undecorated . t)))
-(tool-bar-mode -1) (blink-cursor-mode -1)
-(scroll-bar-mode -1) (menu-bar-mode -1) 
-(global-hl-line-mode 1)
-;;(pixel-scroll-precision-mode 1)
-
-;; --- Sane settings ----------------------------------------------------------
-
-(set-default-coding-systems 'utf-8)
-(setq-default indent-tabs-mode nil
-              ring-bell-function 'ignore
-              select-enable-clipboard t)
-
-;; ---------------------------------------------------------------------------
-
 (setq native-comp-async-report-warnings-errors nil)
-
-;; ---------------------------------------------------------------------------
-
-(setq font-use-system-font t) ;; Use whatever the default monospace font is
-
-;; Set the font. Note: height = px * 100
-;; (set-face-attribute 'default nil :font "JetBrains Mono" 
-;; 				:height 105 :weight 'light) 
-
-;; (set-face-attribute 'default nil
-;;                    :height 140 :weight 'light :family "Roboto Mono")
-;; (set-face-attribute 'bold nil :weight 'regular)
-;; (set-face-attribute 'bold-italic nil :weight 'regular)
-;; (set-display-table-slot standard-display-table 'truncation (make-glyph-code ?…))
-;; (set-display-table-slot standard-display-table 'wrap (make-glyph-code ?–))
-
-;; ---------------------------------------------------------------------------
-
-;; (load-theme 'wombat t)
 
 ;; ---------------------------------------------------------------------------
 
 ;; Bring in package utilities so we can install packages from the web.
 (require 'package)
 
+(setq package-user-dir (expand-file-name "elpa" user-emacs-directory))
+(add-to-list 'load-path package-user-dir)
+(when (file-directory-p package-user-dir)
+  (let ((default-directory package-user-dir))
+    (normal-top-level-add-subdirs-to-load-path)))
+
 ;; Add MELPA, an unofficial (but well-curated) package registry to the
 ;; list of accepted package registries. By default Emacs only uses GNU
 ;; ELPA and NonGNU ELPA, https://elpa.gnu.org/ and
 ;; https://elpa.nongnu.org/ respectively.
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+(defun berkay/package-ensure-autoloads ()
+  "Generate missing package autoloads in `package-user-dir'."
+  (when (file-directory-p package-user-dir)
+    (dolist (dir (directory-files package-user-dir t "\\`[^.]") )
+      (when (file-directory-p dir)
+        (let ((pkg-desc (ignore-errors (package--read-pkg-desc dir))))
+          (when pkg-desc
+            (let ((autoload-file (expand-file-name
+                                  (format "%s-autoloads.el" (package-desc-name pkg-desc))
+                                  dir)))
+              (unless (file-exists-p autoload-file)
+                (package-generate-autoloads (package-desc-name pkg-desc) dir)))))))))
+
+(berkay/package-ensure-autoloads)
+(package-initialize)
 
 ;; Add the :vc keyword to use-package, making it easy to install
 ;; packages directly from git repositories.
@@ -116,15 +93,6 @@
 
 ;; ------------------------------------------------------------------
 
-(setq-default tab-width 4
-              indent-tabs-mode nil
-              fill-column 120)
-
-;; ------------------------------------------------------------------
-
-;; Display messages when idle, without prompting
-(setq help-at-pt-display-when-idle t)
-
 ;; Miscellaneous options
 (setq-default major-mode
               (lambda () ; guess major mode from file name
@@ -132,22 +100,13 @@
                   (let ((buffer-file-name (buffer-name)))
                     (set-auto-mode)))))
 
-(setq window-resize-pixelwise t)
-(setq frame-resize-pixelwise t)
-(setq use-dialog-box nil)
 (save-place-mode t)
 (savehist-mode t)
 (recentf-mode t)
 (global-auto-revert-mode t)
-(global-display-line-numbers-mode t)
-(setq display-line-numbers-type 'relative)
 (setq xref-search-program 'ripgrep)
 
 ;; (electric-pair-mode t)
-(show-paren-mode 1)
-
-(setq confirm-kill-emacs #'y-or-n-p)
-(setopt use-short-answers t)
 
 ;; Store automatic customisation options elsewhere
 (setq custom-file (locate-user-emacs-file "custom.el"))
@@ -162,27 +121,11 @@
 
 ;; ---------------------------------------------------------------------------
 
-(load (expand-file-name "+packages.el" user-emacs-directory))
-(load (expand-file-name "+keybindings.el" user-emacs-directory))
+(setq load-prefer-newer t)
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-; (load (expand-file-name "+nano-theme.el" user-emacs-directory))
-(use-package doom-themes
-  :ensure t
-  :config
-  (load-theme 'doom-gruvbox t))
-
-(use-package auto-dark
-  :ensure t
-  :config
-  (setq auto-dark-dark-theme 'doom-gruvbox)
-  (setq auto-dark-light-theme 'doom-one-light)
-  (auto-dark-mode 1))
-
-; (load "~/nano-emacs/nano-modeline.el")
-(load (expand-file-name "+present.el" user-emacs-directory))
-(load (expand-file-name "+org.el" user-emacs-directory))
-
-(load (expand-file-name "modes/mlir-mode.el" user-emacs-directory))
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file 'noerror 'nomessage)
 
 ;; ---------------------------------------------------------------------------
 
@@ -194,17 +137,13 @@
 ;; Enable .dir-locals.el variables for remote files
 (setq enable-remote-dir-locals t)
 
-;; ---------------------------------------------------------------------------
-
 ;; Don't make project.el search submodules for project roots.
-;; (setq project-vc-merge-submodules nil)
+(setq project-vc-merge-submodules nil)
 
 ;; ---------------------------------------------------------------------------
 
 ;; Drag-and-drop to `dired`
 ;; (add-hook 'dired-mode-hook 'org-download-enable)
-
-;; (set-frame-parameter (selected-frame) 'alpha '(98 . 95))
 
 (setenv "PATH" (concat (getenv "PATH") ":/home/berkay/.local/bin:/home/berkay/bin"))
 (add-to-list 'exec-path "/home/berkay/.local/bin")
@@ -212,12 +151,12 @@
 
 (setenv "DICPATH" "/home/berkay/.config/hunspell")
 
-;; --- Speed benchmarking -----------------------------------------------------
-
-(let ((init-time (float-time (time-subtract (current-time) init-start-time)))
-      (total-time (string-to-number (emacs-init-time "%f"))))
-  (message (concat
-    (propertize "Startup time: " 'face 'bold)
-    (format "%.2fs " init-time)
-    (propertize (format "(+ %.2fs system time)"
-                        (- total-time init-time)) 'face 'shadow))))
+(require 'ui)
+(require 'packages)
+(require 'org-conf)
+(require 'present)
+(require 'keybindings)
+(require 'scroll)
+(require 'my)
+(require 'clipboard-tty)
+; (load (expand-file-name "modes/mlir-mode.el" user-emacs-directory))
