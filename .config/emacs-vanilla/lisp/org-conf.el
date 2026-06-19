@@ -17,6 +17,8 @@
 (setq org-todo-keywords
       '((sequence "TODO" "NEXT" "WAITING" "|" "DONE" "CANCELED")))
 
+(setq org-latex-src-block-backend 'listings)
+
 ;;; Outline-based notes management and organizer
 ;(global-set-key (kbd "C-c l") #'org-store-link)
 ;(global-set-key (kbd "C-c a") #'org-agenda)
@@ -34,6 +36,13 @@
   (setq org-export-with-sub-superscripts '{})
   (plist-put org-format-latex-options :scale 1.5) ; TODO: scale with text too
   (org-roam-db-autosync-mode))
+
+(use-package ox-latex
+  :after org
+  :config
+  (add-to-list 'org-latex-packages-alist '("" "listings"))
+  (add-to-list 'org-latex-packages-alist '("" "xcolor"))
+)
 
 (use-package websocket
   :ensure t
