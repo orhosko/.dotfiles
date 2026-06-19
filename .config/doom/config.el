@@ -3,11 +3,10 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "Orhan Berkay Yılmaz"
-      user-mail-address "orhanberkayyilmaz@hotmail.com")
+(setopt user-full-name "Orhan Berkay Yılmaz"
+      user-mail-address "yilmazorhanberkay@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -21,7 +20,7 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
+;;(setopt doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -32,26 +31,29 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-
-;; (setq doom-theme 'catppuccin)
-;; (setq doom-theme 'everblush)
-
-;; (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
-
-(setq doom-theme 'doom-gruvbox)
-
-;; (setq catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
-
+;;
+;; (setopt catppuccin-flavor 'macchiato) ;; or 'latte, 'macchiato, or 'mocha
 ;; (catppuccin-reload)
-;; (setq doom-theme 'doom-one)
+;;
+;; (setopt doom-theme 'doom-one)
+;; (setopt doom-theme 'everblush)
+(setopt doom-theme 'doom-gruvbox)
+
+;; (after! catppuccin-theme
+;;   (setopt catppuccin-flavor 'latte))
+
+;; (after! auto-dark
+;;   (setopt auto-dark-dark-theme 'doom-gruvbox
+;;           auto-dark-light-theme 'catppuccin)
+;;   (auto-dark-mode 1))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setopt display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/org/")
+(setopt org-directory "~/Documents/org/")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -86,9 +88,9 @@
 ;; they are implemented.
 
 (after! org
-        (setq org-roam-directory "~/Documents/org-roam/")
-        (setq org-roam-index-file "~/Documents/org-roam/index.org")
-        (setq org-startup-folded t))
+        (setopt org-roam-directory "~/Documents/org-roam/")
+        (setopt org-roam-index-file "~/Documents/org-roam/index.org")
+        (setopt org-startup-folded 'fold))
 
 (use-package! websocket
     :after org-roam)
@@ -100,10 +102,10 @@
 ;;         if you don't care about startup time, use
 ;;  :hook (after-init . org-roam-ui-mode)
     :config
-    (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+    (setopt org-roam-ui-sync-theme t
+            org-roam-ui-follow t
+            org-roam-ui-update-on-save t
+            org-roam-ui-open-on-start t))
 
 ;; Drag-and-drop to `dired`
 (add-hook 'dired-mode-hook 'org-download-enable)
@@ -122,67 +124,12 @@
 (add-to-list 'default-frame-alist '(undecorated . t))
 ;(set-frame-parameter (selected-frame) 'alpha '(97 . 99))
 
-(setq load-theme 'catppuccin)
-
-(after! doom-themes
-  ;; set  your favorite themes
-  (setq! catppuccin-flavor 'latte)
-  (setq! auto-dark-dark-theme 'doom-gruvbox
-        auto-dark-light-theme 'catppuccin)
-  (auto-dark-mode 1))
-
 ;; Let the desktop background show through
 ;; (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
-;;; Theme and Fonts ----------------------------------------
-
-       ;; Set reusable font name variables
-       (defvar my/fixed-width-font "JetBrains Mono Nerd Font"
-       "The font to use for monospaced (fixed width) text.")
-
-       (defvar my/variable-width-font "Inter"
-       "The font to use for variable-pitch (document) text.")
-
-; NOTE: These settings might not be ideal for your machine, tweak them as needed!
-       (set-face-attribute 'default nil :font my/fixed-width-font :weight 'light :height 105)
-       (set-face-attribute 'fixed-pitch nil :font my/fixed-width-font :weight 'light :height 110)
-       (set-face-attribute 'variable-pitch nil :font my/variable-width-font :weight 'light :height 1.1)
-
-;;; Org Mode Appearance ------------------------------------
-
-;; Load org-faces to make sure we can set appropriate faces
-(require 'org-faces)
-
-;; Hide emphasis markers on formatted text
-(setq! org-hide-emphasis-markers t)
-
-;; Resize Org headings
-(dolist (face '((org-level-1 . 1.2)
-                (org-level-2 . 1.1)
-                (org-level-3 . 1.05)
-                (org-level-4 . 1.0)
-                (org-level-5 . 1.1)
-                (org-level-6 . 1.1)
-                (org-level-7 . 1.1)
-                (org-level-8 . 1.1)))
-  (set-face-attribute (car face) nil :font my/variable-width-font :weight 'medium :height (cdr face)))
-
-;; Make the document title a bit bigger
-(set-face-attribute 'org-document-title nil :font my/variable-width-font :weight 'bold :height 1.3)
-
-;; Make sure certain org faces use the fixed-pitch face when variable-pitch-mode is on
-(set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
-(set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-(set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-(set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-(set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch)
-
 ;; Configure fill width
 (after! visual-fill-column
-(setq! visual-fill-column-width 120
+(setopt visual-fill-column-width 160
       visual-fill-column-center-text t))
 
 ;;; Org Present --------------------------------------------
@@ -207,7 +154,7 @@
   (setq header-line-format " ")
 
   ;; Display inline images automatically
-  (org-display-inline-images)
+  (org-link-preview-region)
   )
 
 (add-hook 'org-mode-hook
@@ -256,5 +203,50 @@
 ;;   (global-lsp-bridge-mode))
 
 ;; Performance tweaks for modern machines
-(setq! gc-cons-threshold 100000000) ; 100 mb
-(setq! read-process-output-max (* 1024 1024)) ; 1mb
+(setopt gc-cons-threshold 100000000) ; 100 mb
+(setopt read-process-output-max (* 1024 1024)) ; 1mb
+
+
+(use-package! ispell
+  :init
+  (setopt ispell-program-name "hunspell")
+  (setopt ispell-dictionary "en_US,tr_TR")
+
+  :config
+  ;; Configure `LANG`, otherwise ispell.el cannot find a 'default
+  ;; dictionary' even though multiple dictionaries will be configured
+  ;; in next line.
+  (setenv "LANG" "en_US.UTF-8")
+  ;; ispell-set-spellchecker-params has to be called
+  ;; before ispell-hunspell-add-multi-dic will work
+  (ispell-set-spellchecker-params)
+  (ispell-hunspell-add-multi-dic "en_US,tr_TR")
+  ;; For saving words to the personal dictionary, don't infer it from
+  ;; the locale, otherwise it would save to ~/.hunspell_de_DE.
+  (setopt ispell-personal-dictionary "~/.hunspell_personal"))
+
+;; The personal dictionary file has to exist, otherwise hunspell will
+;; silently not use it.
+(unless (file-exists-p ispell-personal-dictionary)
+  (write-region "" nil ispell-personal-dictionary nil 0))
+
+;; TODO(orhosko): broken with tramp
+;; (use-package! xclip
+;;   :if (and (not (display-graphic-p)) (getenv "DISPLAY"))
+;;   :config (xclip-mode 1))
+
+;; (when (and (not (display-graphic-p)) (getenv "WAYLAND_DISPLAY")
+;;            (executable-find "wl-copy") (executable-find "wl-paste"))
+;;   (defun my/wl-copy (text &optional _push)
+;;     (let ((p (make-process :name "wl-copy" :buffer nil
+;;                            :command '("wl-copy" "--type" "text/plain;charset=utf-8")
+;;                            :connection-type 'pipe)))
+;;       (when text (process-send-string p text) (process-send-eof p))))
+;;   (defun my/wl-paste ()
+;;     (let ((text (shell-command-to-string "wl-paste --no-newline --type text/plain")))
+;;       (unless (string= text "") text)))
+;;   (setq interprogram-cut-function   #'my/wl-copy
+;;         interprogram-paste-function #'my/wl-paste))
+
+;; TODO(orhosko): broken
+;; (add-to-list 'tramp-remote-path 'tramp-own-remote-path)

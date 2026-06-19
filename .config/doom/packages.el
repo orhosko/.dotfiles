@@ -91,3 +91,5 @@
 (package! org-pdfview)
 
 (package! protobuf-mode)
+
+(package! xclip)
