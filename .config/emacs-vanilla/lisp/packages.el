@@ -74,7 +74,7 @@
 
 (use-package copilot
   :ensure t
-  :hook (prog-mode . copilot-mode)
+  :hook prog-mode
   :bind (:map copilot-completion-map
               ("M-l" . 'copilot-accept-completion)
               ;;("<tab>" . 'copilot-accept-completion)
@@ -150,15 +150,13 @@
   ;; (completion-styles '(basic))
   )
 
-(defvar corfu-terminal-mode)
-
 (use-package corfu-terminal
   :ensure t
-  :defines (corfu-terminal-mode)
+  :defer t
   :config
   (setq text-mode-ispell-word-completion nil)
   (unless (display-graphic-p)
-    (corfu-terminal-mode +1))
+    (corfu-terminal-mode 1))
   )
 
 
@@ -204,7 +202,7 @@
 
 (use-package dtrt-indent
   :ensure t
-  :hook (prog-mode . dtrt-indent-mode))
+  :hook prog-mode)
 
 ;; (use-package ultra-scroll
 ;;   ;:load-path "~/code/emacs/ultra-scroll" ; if you git clone'd instead of using vc
@@ -302,6 +300,7 @@
 
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
+(add-hook 'prog-mode-hook #'flymake-mode)
 
 ;; ---------------------------------------------------------------------------
 
