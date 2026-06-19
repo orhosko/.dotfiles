@@ -10,7 +10,7 @@
 
   "modules-left": ["custom/launcher", "niri/workspaces", "custom/playerctl", "custom/playerlabel"],
   "modules-center": ["cpu", "memory", "power-profiles-daemon"],
-  "modules-right": ["niri/language", "tray", "custom/theme-mode", "network", "battery", "pulseaudio", "idle_inhibitor", "backlight", "clock"],
+  "modules-right": ["niri/language", "tray", "custom/theme-mode", "custom/bluetooth", "network", "battery", "pulseaudio", "idle_inhibitor", "backlight", "clock"],
 
   "idle_inhibitor": {
     "format": "{icon}",
@@ -89,7 +89,7 @@
       "critical": 15
     },
     "format":"{icon}  {capacity}%",
-    "format-charging": "{capacity}% ",
+    "format-charging": "{capacity}% 󰂄",
     "format-plugged": "{capacity}% ",
     "format-alt": "{icon} {time}",
     // "format-good": "", // An empty format will hide the module
@@ -118,10 +118,10 @@
 
   "network": {
     "format-wifi": "󰤨",
-    "format-ethernet": " {ifname}: Aesthetic",
-    "format-linked": " {ifname} (No IP)",
+    "format-ethernet": "󰈀 {ifname}: Aesthetic",
+    "format-linked": "󰈀 {ifname} (No IP)",
     "format-disconnected": "󰤭",
-    "format-alt": " {ifname}: {ipaddr}/{cidr}",
+    "format-alt": "󰈀 {ifname}: {ipaddr}/{cidr}",
     "tooltip-format": "{essid}",
     "on-click-right": "nm-connection-editor"
   },
@@ -134,7 +134,7 @@
   "backlight": {
     // "device": "acpi_video1",
     "format": "{icon} {percent}%",
-    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "format-icons": ["󰽤", "", "", "", "", "", "", "", ""],
   },
 
   "pulseaudio": {
@@ -153,6 +153,13 @@
   "custom/theme-mode": {
     "format": "󰏘",
     "on-click": "$HOME/.config/scripts/theme",
+  },
+
+  "custom/bluetooth": {
+    "format": "",
+    "interval": "once",
+    "exec": "echo ''",
+    "on-click": "alacritty -e bluetui"
   },
 
   "custom/launcher": {
