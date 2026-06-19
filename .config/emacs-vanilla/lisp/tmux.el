@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t; -*-
 
 (defun my/kill-new-to-system-clipboard (&rest _)
+  (interactive)
   (let ((text (current-kill 0 t)))
     (send-string-to-terminal
      (format "\033]52;c;%s\a"

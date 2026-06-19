@@ -17,6 +17,10 @@
 (setq window-resize-pixelwise t)
 (setq frame-resize-pixelwise t)
 (setq use-dialog-box nil)
+(setq mode-line-compact 'long)
+
+(setq frame-inhibit-implied-resize t)
+(tab-bar-history-mode)
 
 (show-paren-mode 1)
 (column-number-mode 1)
@@ -44,8 +48,22 @@
   (tool-bar-mode -1)
   (scroll-bar-mode -1))
 
-;; (pixel-scroll-precision-mode 1)
 ;; (icomplete-vertical-mode 1)
+
+;; ---------------------------------------------------------------------------
+;; Mouse settings
+
+(context-menu-mode)
+;; (pixel-scroll-mode)
+;; (pixel-scroll-precision-mode) ;; see bug#69972
+(global-xref-mouse-mode)
+(xterm-mouse-mode) ;; Default at emacs 31
+
+(setq save-interprogram-paste-before-kill t)
+(setq mouse-yank-at-point t)
+(setq mouse-drag-and-drop-region t)
+(setq mouse-drag-and-drop-region-cross-program t)
+(setq mouse-drag-mode-line-buffer t)
 
 ;; ---------------------------------------------------------------------------
 
@@ -68,15 +86,15 @@
 
 (use-package doom-themes
   :ensure t
-  :config
-  (load-theme 'doom-gruvbox t))
+)
 
 (use-package auto-dark
   :ensure t
-  :config
-  (setq auto-dark-dark-theme 'doom-gruvbox)
-  (setq auto-dark-light-theme 'doom-one-light)
-  (auto-dark-mode 1))
+  :after doom-themes
+  :init (auto-dark-mode)
+  :custom
+  (auto-dark-themes '((doom-gruvbox) (doom-one-light)))
+)
 
 ;; ---------------------------------------------------------------------------
 

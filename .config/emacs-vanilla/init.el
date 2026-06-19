@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t; -*-
 
 (setq native-comp-async-report-warnings-errors nil)
+(setq use-package-compute-statistics t)
 
 ;; ---------------------------------------------------------------------------
 
@@ -18,21 +19,6 @@
 ;; ELPA and NonGNU ELPA, https://elpa.gnu.org/ and
 ;; https://elpa.nongnu.org/ respectively.
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-
-(defun berkay/package-ensure-autoloads ()
-  "Generate missing package autoloads in `package-user-dir'."
-  (when (file-directory-p package-user-dir)
-    (dolist (dir (directory-files package-user-dir t "\\`[^.]") )
-      (when (file-directory-p dir)
-        (let ((pkg-desc (ignore-errors (package--read-pkg-desc dir))))
-          (when pkg-desc
-            (let ((autoload-file (expand-file-name
-                                  (format "%s-autoloads.el" (package-desc-name pkg-desc))
-                                  dir)))
-              (unless (file-exists-p autoload-file)
-                (package-generate-autoloads (package-desc-name pkg-desc) dir)))))))))
-
-(berkay/package-ensure-autoloads)
 (package-initialize)
 
 ;; Add the :vc keyword to use-package, making it easy to install
@@ -105,10 +91,17 @@
 (save-place-mode t)
 (savehist-mode t)
 (recentf-mode t)
+
 (global-auto-revert-mode t)
 (setq xref-search-program 'ripgrep)
 
+(repeat-mode)
+(delete-selection-mode)
+(editorconfig-mode)
+(indent-tabs-mode nil)
 ;; (electric-pair-mode t)
+(setq imenu-auto-rescan t)
+;; (setq view-read-only t) ;; blocks SPC keybindings
 
 ;; Store automatic customisation options elsewhere
 (setq custom-file (locate-user-emacs-file "custom.el"))
@@ -120,6 +113,15 @@
 
 (use-package ansi-color
     :hook (compilation-filter . ansi-color-compilation-filter))
+
+;; ---------------------------------------------------------------------------
+
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-copy-envs
+   '("PATH" "MANPATH" "INFOPATH" "LD_LIBRARY_PATH"))
+  (exec-path-from-shell-initialize))
 
 ;; ---------------------------------------------------------------------------
 
@@ -146,12 +148,39 @@
 
 ;; Drag-and-drop to `dired`
 ;; (add-hook 'dired-mode-hook 'org-download-enable)
+(setq dired-auto-revert-buffer t)
+(setq dired-mouse-drag-files t)
+(setq dired-listing-switches "-alh --group-directories-first")
+(setq shell-command-prompt-show-cwd t)
+
+(etags-regen-mode)
+(vc-auto-revert-mode)
+(setq vc-deduce-backend-nonvc-modes t)
+(setq vc-dir-save-some-buffers-on-revert t)
+(setq vc-find-revision-no-save t)
+(setq vc-follow-symlinks t)
+(setq vc-use-incoming-outgoing-prefixes t)
+
+(setq minibuffer-visible-completions t)
+(setq completions-detailed t)
+(setq completions-group t)
+(setq completion-auto-select 'second-tab)
+(setq completion-eager-update t)
+(setq completion-styles '(basic emacs22 flex))
+(setq global-completion-preview-mode t)
+(setq tab-always-indent 'complete)
+
+;;;; Package-related options
+(package-autosuggest-mode)
+(setq package-menu-use-current-if-no-marks nil)
 
 (setenv "PATH" (concat (getenv "PATH") ":/home/berkay/.local/bin:/home/berkay/bin"))
 (add-to-list 'exec-path "/home/berkay/.local/bin")
 (add-to-list 'exec-path "/home/berkay/bin")
 
 (setenv "DICPATH" "/home/berkay/.config/hunspell")
+
+;; ---------------------------------------------------------------------------
 
 (require 'ui)
 (require 'packages)
@@ -162,3 +191,17 @@
 (require 'my)
 (require 'clipboard-tty)
 ; (load (expand-file-name "modes/mlir-mode.el" user-emacs-directory))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-vc-selected-packages
+   '((vc-use-package :vc-backend Git :url
+		     "https://github.com/slotThe/vc-use-package"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
