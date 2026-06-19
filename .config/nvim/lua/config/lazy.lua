@@ -25,7 +25,7 @@ vim.g.maplocalleader = "é"
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+		{ 'NMAC427/guess-indent.nvim', opts = {} },
 		-- { "folke/tokyonight.nvim", config = function() vim.cmd.colorscheme "tokyonight" end },
 		{ import = "config.plugins" },
 	},
