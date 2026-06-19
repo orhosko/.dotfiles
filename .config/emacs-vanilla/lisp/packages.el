@@ -349,6 +349,15 @@
 (use-package protobuf-mode
   :ensure t)
 
+(use-package csv-mode
+  :ensure t)
+
+(use-package haskell-mode
+  :ensure t)
+
+(use-package nix-mode
+  :ensure t)
+
 (use-package markdown-mode
   :ensure t
   :hook ((markdown-mode . visual-line-mode)
@@ -410,6 +419,7 @@
    'org-babel-load-languages
    '((mermaid . t)
      (scheme . t)
+     (haskell . t)
      ;(your-other-langs . t)
      ))
   )
