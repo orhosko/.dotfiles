@@ -264,9 +264,18 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
+spawn-at-startup "/usr/libexec/kf6/polkit-kde-authentication-agent-1"
+
 spawn-at-startup "waybar"
 spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/berkay/Pictures/Wallpapers/0.png"
-spawn-at-startup "/usr/libexec/kf6/polkit-kde-authentication-agent-1"
+spawn-at-startup "swayidle" "-w" \
+  "timeout" "300" "swaylock -f"
+  // "timeout" "600" "niri msg action power-off-monitors" \
+  // "before-sleep" "swaylock -f"
+// spawn-at-startup "swayidle" "-w" \
+//   "timeout" "300" "swaylock -f" \
+//   "timeout" "600" "niri msg action power-off-monitors" \
+//   "before-sleep" "swaylock -f"
 
 spawn-at-startup "~/bin/pause_on_disconnect.sh &!"
 spawn-at-startup "~/bin/em"
