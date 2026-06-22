@@ -206,6 +206,7 @@
 (setopt gc-cons-threshold 100000000) ; 100 mb
 (setopt read-process-output-max (* 1024 1024)) ; 1mb
 
+(setopt +corfu-want-tab-prefer-navigating-snippets t)
 
 (use-package! ispell
   :init

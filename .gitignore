@@ -1,5 +1,6 @@
 .config/emacs-vanilla/*
 !.config/emacs-vanilla/init.el
+!.config/emacs-vanilla/snippets/
 !.config/emacs-vanilla/lisp/*.el
 
 .ssh/

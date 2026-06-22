@@ -248,6 +248,21 @@
   :config
   (which-key-mode))
 
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :ensure t
+  :after yasnippet)
+
+(use-package yasnippet-capf
+  :ensure t
+  :after cape
+  :config
+  (add-to-list 'completion-at-point-functions #'yasnippet-capf))
+
 ; (use-package flycheck-posframe
 ;   :ensure t
 ;   :after flycheck
