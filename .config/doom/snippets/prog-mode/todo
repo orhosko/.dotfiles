@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: todo
+# key: tod
+# --
+
+`(progn
+   (comment-normalize-vars)
+   (replace-regexp-in-string "[ \t\n\r]+\\'" "" (or comment-start "#")))` TODO(orhosko): $0`(let ((ce (or comment-end "")))
+   (if (string= ce "")
+       ""
+     (concat " " (replace-regexp-in-string "\\`[ \t\n\r]+" "" ce))))`
