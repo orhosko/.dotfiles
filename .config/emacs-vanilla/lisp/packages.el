@@ -17,10 +17,6 @@
 
 ;; ---------------------------------------------------------------------
 
-; (load (expand-file-name "packages/llms.el" user-emacs-directory))
-
-;; ---------------------------------------------------------------------
-
 (use-package evil
   :ensure t
   :init
@@ -72,34 +68,8 @@
 
 ;; ---------------------------------------------------------------------------
 
-(use-package copilot
-  :ensure t
-  :hook prog-mode
-  :bind (:map copilot-completion-map
-              ("M-l" . 'copilot-accept-completion)
-              ;;("<tab>" . 'copilot-accept-completion)
-              ;;("TAB" . 'copilot-accept-completion)
-              ;;("C-TAB" . 'copilot-accept-completion-by-word)
-              ;;("C-<tab>" . 'copilot-accept-completion-by-word)
-              )
-  :config
-  (add-to-list 'copilot-indentation-alist '(prog-mode 4))
-  (add-to-list 'copilot-indentation-alist '(c++-mode 4))
-  (add-to-list 'copilot-indentation-alist '(org-mode 2))
-  (add-to-list 'copilot-indentation-alist '(text-mode 2))
-  (add-to-list 'copilot-indentation-alist '(closure-mode 2))
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
-
-;; ---------------------------------------------------------------------------
-
 (setq completion-auto-help nil)
 
-;; Minibuffer completion is essential to your Emacs workflow and
-;; Vertico is currently one of the best out there. There's a lot to
-;; dive in here so I recommend checking out the documentation for more
-;; details: https://elpa.gnu.org/packages/vertico.html. The short and
-;; sweet of it is that you search for commands with "M-x do-thing" and
-;; the minibuffer will show you a filterable list of matches.
 (use-package vertico
   :ensure t
   :custom
@@ -116,9 +86,6 @@
   :config
   (marginalia-mode 1))
 
-;; ---------------------------------------------------------------------------
-
-;;; Extended completion utilities
 (use-package consult
   :ensure t
   :config
@@ -158,7 +125,6 @@
   (unless (display-graphic-p)
     (corfu-terminal-mode 1))
   )
-
 
 ;; ---------------------------------------------------------------------------
 
@@ -270,27 +236,6 @@
 ;   (add-hook 'flycheck-mode-hook #'flycheck-posframe-mode)
 ;   (flycheck-posframe-configure-pretty-defaults))
 
-(setq
- ;; Edit settings
- org-auto-align-tags nil
- org-tags-column 0
- org-fold-catch-invisible-edits 'show-and-error
- org-special-ctrl-a/e t
- org-insert-heading-respect-content t
-
- ;; Org styling, hide markup etc.
- org-hide-emphasis-markers t
- org-pretty-entities t
- org-agenda-tags-column 0
- org-ellipsis "…")
-
-(use-package org-modern
-  :ensure t
-  :hook (org-mode . org-modern-mode)
-  :custom
-  (global-org-modern-mode)
-  (org-modern-list '((?+ . "➕") (?* . "➤") (?- . "➖"))))
-
 (modify-all-frames-parameters
  '((right-divider-width . 20)
    (internal-border-width . 20)))
@@ -307,27 +252,9 @@
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 
-(use-package pdf-tools
-    :ensure t
-    :config
-    (require 'pdf-occur)
-    (pdf-tools-install))
-
 (add-hook 'text-mode-hook #'flyspell-mode)
 (add-hook 'prog-mode-hook #'flyspell-prog-mode)
 (add-hook 'prog-mode-hook #'flymake-mode)
-
-;; ---------------------------------------------------------------------------
-
-(use-package aider
-    :ensure t
-    :config
-    ;; (setq aider-args '("--model" "gpt-5-codex" "--no-auto-accept-architect" "--no-auto-commits")) :: use .aider.config.yaml instead
-    (global-set-key (kbd "C-c a") 'aider-transient-menu) ;; for wider screen
-    ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
-    (aider-magit-setup-transients) ;; add aider magit function to magit menu
-    (global-auto-revert-mode 1) ;; auto revert buffer
-    (auto-revert-mode 1))
 
 ;; ---------------------------------------------------------------------------
 
@@ -389,8 +316,6 @@
   (add-hook 'LaTeX-mode-hook #'LaTeX-math-mode)
   (add-hook 'LaTeX-mode-hook #'reftex-mode))
 
-;; ---------------------------------------------------------------------------
-
 (use-package verilog-ext
   :ensure t
   :hook ((verilog-mode . verilog-ext-mode))
@@ -420,24 +345,6 @@
   :config
   (verilog-ext-mode-setup)
   (define-key verilog-mode-map (kbd ";") 'self-insert-command))
-
-(use-package org-download
-  :ensure t)
-(add-hook 'dired-mode-hook 'org-download-enable)
-
-(use-package ob-mermaid
-  :ensure t
-  :after org
-  :config
-  (setq ob-mermaid-cli-path "mmdc")
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((mermaid . t)
-     (scheme . t)
-     (haskell . t)
-     ;(your-other-langs . t)
-     ))
-  )
 
 ;; TODO: find a way to both support c and c++ modes
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))

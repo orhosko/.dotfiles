@@ -23,6 +23,20 @@
 ;(global-set-key (kbd "C-c l") #'org-store-link)
 ;(global-set-key (kbd "C-c a") #'org-agenda)
 
+(setq
+ ;; Edit settings
+ org-auto-align-tags nil
+ org-tags-column 0
+ org-fold-catch-invisible-edits 'show-and-error
+ org-special-ctrl-a/e t
+ org-insert-heading-respect-content t
+
+ ;; Org styling, hide markup etc.
+ org-hide-emphasis-markers t
+ org-pretty-entities t
+ org-agenda-tags-column 0
+ org-ellipsis "…")
+
 (use-package org-roam
   :ensure t
   :after org
@@ -36,6 +50,13 @@
   (setq org-export-with-sub-superscripts '{})
   (plist-put org-format-latex-options :scale 1.5) ; TODO: scale with text too
   (org-roam-db-autosync-mode))
+
+(use-package org-modern
+  :ensure t
+  :hook (org-mode . org-modern-mode)
+  :custom
+  (global-org-modern-mode)
+  (org-modern-list '((?+ . "➕") (?* . "➤") (?- . "➖"))))
 
 (use-package ox-latex
   :after org
@@ -60,6 +81,7 @@
 
 (use-package org-download
   :ensure t)
+(add-hook 'dired-mode-hook 'org-download-enable)
 
 ;; ---------------------------------------------------------------------------
 
@@ -77,6 +99,20 @@
 
 (use-package ob-async
   :ensure t)
+
+(use-package ob-mermaid
+  :ensure t
+  :after org
+  :config
+  (setq ob-mermaid-cli-path "mmdc")
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((mermaid . t)
+     (scheme . t)
+     (haskell . t)
+     ;(your-other-langs . t)
+     ))
+  )
 
 ;; ---------------------------------------------------------------------------
 

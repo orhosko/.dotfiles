@@ -153,8 +153,8 @@
 (setq dired-listing-switches "-alh --group-directories-first")
 (setq shell-command-prompt-show-cwd t)
 
-(etags-regen-mode)
-(vc-auto-revert-mode)
+;; (etags-regen-mode)
+;; (vc-auto-revert-mode)
 (setq vc-deduce-backend-nonvc-modes t)
 (setq vc-dir-save-some-buffers-on-revert t)
 (setq vc-find-revision-no-save t)
@@ -174,34 +174,16 @@
 (package-autosuggest-mode)
 (setq package-menu-use-current-if-no-marks nil)
 
-(setenv "PATH" (concat (getenv "PATH") ":/home/berkay/.local/bin:/home/berkay/bin"))
-(add-to-list 'exec-path "/home/berkay/.local/bin")
-(add-to-list 'exec-path "/home/berkay/bin")
-
-(setenv "DICPATH" "/home/berkay/.config/hunspell")
-
 ;; ---------------------------------------------------------------------------
 
 (require 'ui)
 (require 'packages)
-(require 'org-conf)
 (require 'present)
 (require 'keybindings)
 (require 'scroll)
 (require 'my)
 (require 'clipboard-tty)
-; (load (expand-file-name "modes/mlir-mode.el" user-emacs-directory))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-vc-selected-packages
-   '((vc-use-package :vc-backend Git :url
-		     "https://github.com/slotThe/vc-use-package"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(require 'local)
+(require 'llms)
+(require 'org-conf)
