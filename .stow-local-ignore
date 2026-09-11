@@ -25,3 +25,4 @@ _darcs
 .gitconfig
 .config/emacs-vanilla/org-roam.db
 
+.config/systemd/user/default.target.wants

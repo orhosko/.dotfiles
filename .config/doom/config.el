@@ -6,7 +6,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setopt user-full-name "Orhan Berkay Yılmaz"
-      user-mail-address "yilmazorhanberkay@gmail.com")
+        user-mail-address "yilmazorhanberkay@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -88,24 +88,24 @@
 ;; they are implemented.
 
 (after! org
-        (setopt org-roam-directory "~/Documents/org-roam/")
-        (setopt org-roam-index-file "~/Documents/org-roam/index.org")
-        (setopt org-startup-folded 'fold))
+  (setopt org-roam-directory "~/Documents/org-roam/")
+  (setopt org-roam-index-file "~/Documents/org-roam/index.org")
+  (setopt org-startup-folded 'fold))
 
 (use-package! websocket
-    :after org-roam)
+  :after org-roam)
 
 (use-package! org-roam-ui
-    :after org-roam ;; or :after org
-;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
-;;         A hookable mode anymore, you're advised to pick something yourself
-;;         if you don't care about startup time, use
-;;  :hook (after-init . org-roam-ui-mode)
-    :config
-    (setopt org-roam-ui-sync-theme t
-            org-roam-ui-follow t
-            org-roam-ui-update-on-save t
-            org-roam-ui-open-on-start t))
+  :after org-roam ;; or :after org
+  ;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+  ;;         A hookable mode anymore, you're advised to pick something yourself
+  ;;         if you don't care about startup time, use
+  ;;  :hook (after-init . org-roam-ui-mode)
+  :config
+  (setopt org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
 
 ;; Drag-and-drop to `dired`
 (add-hook 'dired-mode-hook 'org-download-enable)
@@ -122,15 +122,15 @@
               ))
 
 (add-to-list 'default-frame-alist '(undecorated . t))
-;(set-frame-parameter (selected-frame) 'alpha '(97 . 99))
+                                        ;(set-frame-parameter (selected-frame) 'alpha '(97 . 99))
 
 ;; Let the desktop background show through
 ;; (add-to-list 'default-frame-alist '(alpha . (90 . 90)))
 
 ;; Configure fill width
 (after! visual-fill-column
-(setopt visual-fill-column-width 160
-      visual-fill-column-center-text t))
+  (setopt visual-fill-column-width 160
+          visual-fill-column-center-text t))
 
 ;;; Org Present --------------------------------------------
 
@@ -158,9 +158,9 @@
   )
 
 (add-hook 'org-mode-hook
-  (lambda ()
-  (visual-fill-column-mode 1)
-  (visual-line-mode 1)))
+          (lambda ()
+            (visual-fill-column-mode 1)
+            (visual-line-mode 1)))
 
 (defun my/org-present-end ()
   ;; Reset font customizations
@@ -173,9 +173,9 @@
   (org-remove-inline-images)
   )
 
-  ;; Stop centering the document
-  ;; (visual-fill-column-mode 0)
-  ;; (visual-line-mode 0))
+;; Stop centering the document
+;; (visual-fill-column-mode 0)
+;; (visual-line-mode 0))
 
 ;; Turn on variable pitch fonts in Org Mode buffers
 ;; (add-hook 'org-mode-hook 'variable-pitch-mode)
@@ -191,7 +191,7 @@
 (add-hook 'find-file-hook 'display-line-numbers-equalize)
 
 (use-package! org-appear
-   :hook (org-mode . org-appear-mode))
+  :hook (org-mode . org-appear-mode))
 
 ;; (require 'verilog-ext)
 ;; (verilog-ext-mode-setup)

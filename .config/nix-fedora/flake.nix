@@ -24,9 +24,11 @@
         (import ./tex.nix { inherit pkgs; })
       ];
 
-      tex = pkgs.texliveBasic.withPackages (
-        ps: pkgs.lib.concatMap (feature: (feature.texPackages or (_: [ ])) ps) features
-      );
+      tex =
+        (pkgs.texliveBasic.withPackages (
+          ps: pkgs.lib.concatMap (feature: (feature.texPackages or (_: [ ])) ps) features
+        )).overrideAttrs
+          { withDocs = true; };
     in
     {
       packages.${system}.default = pkgs.buildEnv {
