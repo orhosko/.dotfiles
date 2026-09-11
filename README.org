@@ -21,7 +21,28 @@ stow .
 
 *** [[https://github.com/rvaiya/keyd][keyd]]
 - compile from source in fedora
+
 - fill =/etc/keyd/default.conf=
+#+begin_src conf
+  [ids]
+  *
+
+  [main]
+  capslock = overload(control, esc)
+  esc = capslock
+#+end_src
+
+- fill =/etc/keyd/m560.conf=
+#+begin_src conf
+  [ids]
+  046d:402d
+
+  [main]
+  mouseback = mouse1
+  mouseforward = mouse2
+#+end_src
+
+- =sudo keyd reload=
 
 *** hyprland - gdm bug
 
