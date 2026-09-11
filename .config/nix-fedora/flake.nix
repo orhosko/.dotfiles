@@ -17,17 +17,23 @@
         };
       };
 
-      tex = import ./tex.nix { inherit pkgs; };
-      emacs = import ./emacs.nix { inherit pkgs; };
-      lsp = import ./lsp.nix { inherit pkgs; };
+      # Comment out a feature import to omit its packages and TeX requirements.
+      features = [
+        (import ./emacs.nix { inherit pkgs; })
+        (import ./lsp.nix { inherit pkgs; })
+        (import ./tex.nix { inherit pkgs; })
+      ];
+
+      tex = pkgs.texliveBasic.withPackages (
+        ps: pkgs.lib.concatMap (feature: (feature.texPackages or (_: [ ])) ps) features
+      );
     in
     {
       packages.${system}.default = pkgs.buildEnv {
         name = "fedora-nix-env";
         paths =
-          emacs.paths
-          ++ lsp.paths
-          ++ tex.paths
+          pkgs.lib.concatMap (feature: feature.paths) features
+          ++ [ tex ]
           ++ [
             # langs
             pkgs.go

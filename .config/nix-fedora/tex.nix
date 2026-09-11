@@ -1,7 +1,7 @@
 { pkgs }:
-let
-  tex = pkgs.texlive.combine {
-    inherit (pkgs.texlive)
+{
+  texPackages =
+    ps: with ps; [
       scheme-basic # Minimal TeX Live base system.
 
       latex-bin # Provides core LaTeX commands, including pdflatex format support.
@@ -37,11 +37,9 @@ let
       ieeetran # Provides the IEEEtran document class for IEEE publications.
       comment # Provides block comments with the comment environment.
       changepage # Allows temporary margin/layout changes like adjustwidth.
-      multirow; # Provides the multirow command for table cells spanning multiple rows.
-  };
-in {
+      multirow # Provides the multirow command for table cells spanning multiple rows.
+    ];
   paths = [
-    tex
     pkgs.mermaid-cli # Provides mmdc, the Mermaid CLI renderer.
   ];
 }
