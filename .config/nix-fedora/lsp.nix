@@ -27,5 +27,7 @@
     pkgs.ocamlPackages.ocp-indent
 
     pkgs.nixfmt
+
+    pkgs.markdownlint-cli
   ];
 }

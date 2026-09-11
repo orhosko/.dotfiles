@@ -23,4 +23,5 @@ _darcs
 ^/COPYING
 
 .gitconfig
-vanilla-emacs/org-roam.db
+.config/emacs-vanilla/org-roam.db
+
