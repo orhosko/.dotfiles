@@ -76,3 +76,5 @@ if [[ "$PATH" == *"/nix/store"* ]]; then
 fi
 
 alias ff='fastfetch -c examples/25'
+
+eval "$(direnv hook bash)"

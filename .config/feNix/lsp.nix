@@ -1,6 +1,8 @@
 { pkgs }:
 {
   paths = [
+    pkgs.direnv
+
     pkgs.lua-language-server
 
     pkgs.typescript-language-server
