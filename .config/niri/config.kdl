@@ -267,7 +267,7 @@ layout {
 spawn-at-startup "/usr/libexec/kf6/polkit-kde-authentication-agent-1"
 
 spawn-at-startup "waybar"
-spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/berkay/Pictures/Wallpapers/0.png"
+spawn-at-startup "swaybg" "-m" "fill" "-i" "/home/berkay/Pictures/Wallpapers/current"
 spawn-at-startup "swayidle" "-w" \
   "timeout" "300" "swaylock -f"
   // "timeout" "600" "niri msg action power-off-monitors" \

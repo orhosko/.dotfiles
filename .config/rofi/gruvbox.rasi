@@ -38,7 +38,8 @@ mainbox {
 inputbar {
     padding: 3em;
     children: [prompt,entry];
-    background-image: url("~/Pictures/Wallpapers/0.png", width);
+    /* Absolute on purpose: rofi can't expand ~ in an image path that has no extension */
+    background-image: url("/home/berkay/Pictures/Wallpapers/current", width);
     spacing: -1px;
 }
 
