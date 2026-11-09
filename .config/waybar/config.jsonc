@@ -54,6 +54,20 @@
     },
   },
 
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+      //"1": "一",
+      //"2": "二",
+      //"3": "三",
+      //"4": "四",
+      //"5": "五",
+      "active": "",
+      "default": "󰧞",
+    },
+  },
+
   "custom/playerctl": {
     "format": "{icon}",
     "return-type": "json",
@@ -187,4 +201,9 @@
     "format": "{short}",
     "on-click": "niri msg action switch-layout next",
   }, 
+
+  "hyprland/language": {
+    "format": "{short}",
+    "on-click": "hyprctl switchxkblayout all next",
+  },
 }

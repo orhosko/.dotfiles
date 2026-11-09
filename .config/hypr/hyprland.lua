@@ -36,7 +36,7 @@ local menu        = "rofi -show drun"
 
 -- See https://wiki.hypr.land/configuring/core/autostart/
 hl.on("hyprland.start", function()
-    hl.exec_cmd("waybar")
+    hl.exec_cmd("waybar -c ~/.config/waybar/config-hyprland.jsonc")
     hl.exec_cmd("firefox")
     hl.exec_cmd("emacs --init-directory ~/.config/emacs-vanilla/")
 end)

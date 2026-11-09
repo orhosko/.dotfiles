@@ -1,0 +1,9 @@
+// Hyprland variant of config.jsonc, started by the autostart in ../hypr/hyprland.lua.
+// Everything comes from config.jsonc except these lists, which swap the niri modules
+// for the Hyprland ones. Keep them in sync when adding modules there.
+{
+  "include": ["~/.config/waybar/config.jsonc"],
+
+  "modules-left": ["custom/launcher", "hyprland/workspaces", "custom/playerctl", "custom/playerlabel"],
+  "modules-right": ["hyprland/language", "tray", "custom/theme-mode", "custom/bluetooth", "network", "battery", "pulseaudio", "idle_inhibitor", "backlight", "clock"],
+}
