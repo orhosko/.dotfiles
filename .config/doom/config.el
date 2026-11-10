@@ -90,7 +90,13 @@
 (after! org
   (setopt org-roam-directory "~/Documents/org-roam/")
   (setopt org-roam-index-file "~/Documents/org-roam/index.org")
-  (setopt org-startup-folded 'fold))
+  (setopt org-startup-folded 'fold)
+  (add-to-list 'org-capture-templates
+               '("d" "Daily note" entry
+                 (file "daily.org")
+                 "* [/] %<%Y-%m-%d %a>\n- [ ] fleeting notes\n- [ ] 10 open tabs\n- [ ] 10 archive ss\n- [ ] %?"
+                 :prepend t
+                 :empty-lines-after 1)))
 
 (use-package! websocket
   :after org-roam)
@@ -254,3 +260,14 @@
 
 ;; TODO(orhosko): broken
 ;; (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+
+(use-package dired-aux
+  :ensure nil
+  :config
+  (add-to-list 'dired-compress-file-alist
+               '("\\.7z\\'" . "7z a -mx=9 %o %i"))
+
+  (add-to-list 'dired-compress-files-alist
+               '("\\.7z\\'" . "7z a -mx=9 %o %i"))
+  ;; (setq dired-compress-directory-default-suffix ".7z")
+  )

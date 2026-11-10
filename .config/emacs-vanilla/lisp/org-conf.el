@@ -4,15 +4,20 @@
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
 (setq org-capture-templates
-        '(("t" "Personal todo" entry
-           (file+headline "todo.org" "Inbox")
-           "* [ ] %?\n%i\n%a" :prepend t)
-          ("n" "Personal notes" entry
-           (file+headline "notes.org" "Inbox")
-           "* %u %?\n%i\n%a" :prepend t)
-          ("j" "Journal" entry
-           (file+olp+datetree "journal.org")
-           "* %U %?\n%i\n%a" :prepend t)))
+      '(("t" "Personal todo" entry
+         (file+headline "todo.org" "Inbox")
+         "* [ ] %?\n%i\n%a" :prepend t)
+        ("n" "Personal notes" entry
+         (file+headline "notes.org" "Inbox")
+         "* %u %?\n%i\n%a" :prepend t)
+        ("j" "Journal" entry
+         (file+olp+datetree "journal.org")
+         "* %U %?\n%i\n%a" :prepend t)
+        ("d" "Daily note" entry
+         (file "daily.org")
+         "* [/] %<%Y-%m-%d %a>\n- [ ] fleeting notes\n- [ ] 10 open tabs\n- [ ] 10 archive ss\n- [ ] %?"
+         :prepend t
+         :empty-lines-after 1)))
 
 (setq org-todo-keywords
       '((sequence "TODO" "NEXT" "WAITING" "|" "DONE" "CANCELED")))
@@ -20,8 +25,8 @@
 (setq org-latex-src-block-backend 'listings)
 
 ;;; Outline-based notes management and organizer
-;(global-set-key (kbd "C-c l") #'org-store-link)
-;(global-set-key (kbd "C-c a") #'org-agenda)
+;; (global-set-key (kbd "C-c l") #'org-store-link)
+;; (global-set-key (kbd "C-c a") #'org-agenda)
 
 (setq
  ;; Edit settings
@@ -63,7 +68,7 @@
   :config
   (add-to-list 'org-latex-packages-alist '("" "listings"))
   (add-to-list 'org-latex-packages-alist '("" "xcolor"))
-)
+  )
 
 (use-package websocket
   :ensure t
@@ -72,12 +77,12 @@
 (use-package org-roam-ui
   :ensure t
   :after org-roam
-;;:hook (after-init . org-roam-ui-mode)
+  ;; :hook (after-init . org-roam-ui-mode)
   :config
   (setq org-roam-ui-sync-theme t
-          org-roam-ui-follow t
-          org-roam-ui-update-on-save t
-          org-roam-ui-open-on-start t))
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
 
 (use-package org-download
   :ensure t)
@@ -110,7 +115,7 @@
    '((mermaid . t)
      (scheme . t)
      (haskell . t)
-     ;(your-other-langs . t)
+     ;; (your-other-langs . t)
      ))
   )
 
