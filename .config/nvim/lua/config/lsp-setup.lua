@@ -1,6 +1,7 @@
 vim.lsp.config('clangd', {
   -- capabilities = { offsetEncoding = { 'utf-16' } },
   -- cmd = { 'clangd', '--experimental-modules-support' },
+  cmd = { 'clangd', '-j=2', '--clang-tidy' }, -- same as the Emacs configs
 })
 vim.lsp.enable('clangd')
 

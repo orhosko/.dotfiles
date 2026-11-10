@@ -62,6 +62,9 @@
                `(verilog-mode . ("verible-verilog-ls")))
   (add-to-list 'eglot-server-programs
                `(mlir-mode . ("mlir-lsp-server")))
+  (add-to-list 'eglot-server-programs
+               `((c-mode c-ts-mode c++-mode c++-ts-mode objc-mode)
+                 . ("clangd" "-j=2" "--clang-tidy")))
   )
 
 ;; In addition to installing packages from the configured package

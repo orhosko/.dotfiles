@@ -202,6 +202,9 @@
 ;;   (setq lsp-bridge-enable-log nil)
 ;;   (global-lsp-bridge-mode))
 
+(set-eglot-client! '(c-mode c-ts-mode c++-mode c++-ts-mode objc-mode)
+                   '("clangd" "-j=2" "--clang-tidy"))
+
 ;; Performance tweaks for modern machines
 (setopt gc-cons-threshold 100000000) ; 100 mb
 (setopt read-process-output-max (* 1024 1024)) ; 1mb
