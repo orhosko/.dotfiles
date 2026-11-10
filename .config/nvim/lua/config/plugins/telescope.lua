@@ -50,7 +50,14 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
     vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = '[S]earch in existing [b]uffers' })
     vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
-    vim.keymap.set('n', '<leader><leader>', builtin.git_files, { desc = '[ ] Find in project' })
+    vim.keymap.set('n', '<leader><leader>', function()
+      local result = vim.fn.systemlist { 'git', '-C', vim.fn.getcwd(), 'rev-parse', '--is-inside-work-tree' }
+      if vim.v.shell_error == 0 and result[1] == 'true' then
+        builtin.git_files()
+      else
+        builtin.find_files()
+      end
+    end, { desc = '[ ] Find in project' })
 
     -- This runs on LSP attach per buffer (see main LSP attach function in 'neovim/nvim-lspconfig' config for more info,
     -- it is better explained there). This allows easily switching between pickers if you prefer using something else!
