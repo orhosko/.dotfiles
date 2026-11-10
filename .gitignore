@@ -4,4 +4,3 @@
 !.config/emacs-vanilla/lisp/
 
 .ssh/
-!.ssh/config
