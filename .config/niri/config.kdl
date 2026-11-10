@@ -378,7 +378,7 @@ binds {
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
-    Mod+G { spawn "bash" "-c" "cat /home/berkay/Documents/pat.txt | wl-copy -n"; }
+    Mod+G { spawn "bash" "-c" "~/.config/scripts/copy-pat"; }
     Mod+Z { spawn "nixGL" "woomer"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.

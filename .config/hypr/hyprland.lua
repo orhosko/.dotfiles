@@ -274,6 +274,7 @@ hl.bind(mainMod .. " + E", hl.dsp.focus({ workspace = 4 }))
 
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("~/.config/scripts/copy-pat")) -- same as niri
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 
 -- Move focus with mainMod + arrow keys

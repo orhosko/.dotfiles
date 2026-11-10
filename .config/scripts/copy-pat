@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Copies the token in pat.txt to the clipboard (Super+G in niri and Hyprland).
+# Looks in the user's Documents folder; set PAT_FILE to use another file.
+
+documents=$(xdg-user-dir DOCUMENTS 2>/dev/null)
+# xdg-user-dir falls back to $HOME when no Documents folder is configured
+if [ -z "$documents" ] || [ "$documents" = "$HOME" ]; then
+    documents="$HOME/Documents"
+fi
+
+token_file="${PAT_FILE:-$documents/pat.txt}"
+
+if [ ! -r "$token_file" ]; then
+    notify-send "copy-pat" "Can't read $token_file"
+    exit 1
+fi
+
+wl-copy -n < "$token_file"
