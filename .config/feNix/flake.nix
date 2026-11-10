@@ -86,7 +86,7 @@
               # pkgs.ghostty
 
               # rest
-              pkgs.google-chrome
+              # pkgs.google-chrome
               pkgs.anki
               pkgs.keepassxc
               pkgs.proton-vpn
