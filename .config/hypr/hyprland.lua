@@ -18,14 +18,14 @@ hl.monitor({
     output   = "",
     mode     = "preferred",
     position = "auto",
-    scale    = 0.83333,
+    scale    = 1,
 })
 
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
 
-local terminal    = "kitty"
+local terminal    = "alacritty"
 local fileManager = "nautilus"
 local menu        = "rofi -show drun"
 
@@ -39,7 +39,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("swaybg -m fill -i /home/berkay/Pictures/Wallpapers/current")
     hl.exec_cmd("waybar -c ~/.config/waybar/config-hyprland.jsonc")
     hl.exec_cmd("firefox")
-    hl.exec_cmd("emacs --init-directory ~/.config/emacs-vanilla/")
 end)
 
 
@@ -79,10 +78,10 @@ hl.env("HYPRCURSOR_SIZE", "24")
 -- Refer to https://wiki.hypr.land/configuring/core/config-options/
 hl.config({
     general = {
-        gaps_in  = 5,
-        gaps_out = 10,
+        gaps_in  = 3,
+        gaps_out = 5,
 
-        border_size = 2,
+        border_size = 1,
 
         col = {
             active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
@@ -146,9 +145,9 @@ hl.animation({ leaf = "layersIn",      enabled = true, speed = 4,    bezier = "e
 hl.animation({ leaf = "layersOut",     enabled = true, speed = 1.5,  bezier = "linear",       style = "fade" })
 hl.animation({ leaf = "fadeLayersIn",  enabled = true, speed = 1.79, bezier = "almostLinear" })
 hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspaces",    enabled = true, speed = 1.94, bezier = "almostLinear", style = "slidevert" })
+hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 1.21, bezier = "almostLinear", style = "slidevert" })
+hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "slidevert" })
 
 -- Ref https://wiki.hypr.land/configuring/core/rules/workspace-rules/
 -- "Smart gaps" / "No gaps when only"

@@ -103,9 +103,11 @@ output "eDP-1" {
     position x=3440 y=360
 }
 
-output "HDMI-A-1" {
+output "DP-1" {
     mode "3440x1440@50"
     variable-refresh-rate
+
+    scale 1
 
     position x=0 y=0
 }
@@ -278,7 +280,7 @@ spawn-at-startup "swayidle" "-w" \
 //   "before-sleep" "swaylock -f"
 
 spawn-at-startup "~/bin/pause_on_disconnect.sh &!"
-spawn-at-startup "~/bin/em"
+// spawn-at-startup "~/bin/em" // raced emacs.service for the default server socket, stole it, and made emacs.service crash-loop restarting its copilot-language-server forever
 spawn-at-startup "firefox"
 
 // Uncomment this line to ask the clients to omit their client-side decorations if possible.
