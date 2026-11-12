@@ -21,6 +21,18 @@ hl.monitor({
     scale    = 1,
 })
 
+-- Turn the laptop screen off while the lid is closed and another display is connected.
+-- Helper functions live in ./scripts/ (require("scripts.x") loads scripts/x.lua)
+local lid = require("scripts.lid")
+
+if lid.closedWithExternalDisplay() then
+    hl.monitor({ output = "eDP-1", disabled = true })
+end
+
+-- Reloading re-runs the check above whenever the lid opens or closes
+-- See https://wiki.hypr.land/configuring/core/binds/switches/
+hl.bind("switch:Lid Switch", hl.dsp.reload_config(), { locked = true })
+
 ---------------------
 ---- MY PROGRAMS ----
 ---------------------
@@ -38,6 +50,7 @@ local menu        = "rofi -show drun"
 hl.on("hyprland.start", function()
     hl.exec_cmd("swaybg -m fill -i /home/berkay/Pictures/Wallpapers/current")
     hl.exec_cmd("waybar -c ~/.config/waybar/config-hyprland.jsonc")
+    hl.exec_cmd("swayidle -w timeout 300 'swaylock -f'") -- lock after 5 min idle, same as niri
     hl.exec_cmd("firefox")
 end)
 
@@ -50,6 +63,11 @@ end)
 hl.env("XCURSOR_THEME", "Adwaita")
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+
+-- Use the login shell's PATH (~/.nix-profile/bin, ~/.local/bin, ...) like niri does;
+-- start-hyprland only gives /usr/local/bin:/usr/bin
+local path = require("scripts.env").loginShellPath()
+if path then hl.env("PATH", path) end
 
 
 -----------------------
@@ -262,7 +280,9 @@ local mainMod = "SUPER"
 -- See https://wiki.hypr.land/configuring/core/binds/ for more
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + Q",      hl.dsp.window.close())
-hl.bind(mainMod .. " + F",         hl.dsp.window.fullscreen({ action = "toggle", mode = "maximized" }))
+-- Like niri's maximize-column: widen to full width, press again to restore the previous width
+local column = require("scripts.column") -- ./scripts/column.lua
+hl.bind(mainMod .. " + F",         column.toggleWidth)
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle", mode = "fullscreen" }))
 
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
@@ -274,20 +294,23 @@ hl.bind(mainMod .. " + E", hl.dsp.focus({ workspace = 4 }))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("~/.config/scripts/copy-pat")) -- same as niri
+hl.bind(mainMod .. " + ALT + L", hl.dsp.exec_cmd("swaylock")) -- lock screen, same as niri
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 
 -- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
+-- Left/right use the layout's own focus: hl.dsp.focus wraps around at the
+-- last column even with wrap_focus = false. The layout one stops, like niri.
+hl.bind(mainMod .. " + left",  hl.dsp.layout("focus l"))
+hl.bind(mainMod .. " + right", hl.dsp.layout("focus r"))
 hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
 -- Scrolling layout, same keys as niri
 -- See https://wiki.hypr.land/configuring/layouts/scrolling-layout/ for more
-hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + H", hl.dsp.layout("focus l"))
 hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
 hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+hl.bind(mainMod .. " + L", hl.dsp.layout("focus r"))
 
 -- Move columns left/right and windows up/down inside a column
 hl.bind(mainMod .. " + CTRL + left",  hl.dsp.layout("swapcol l"))
@@ -313,8 +336,8 @@ hl.bind(mainMod .. " + CTRL + F",   hl.dsp.layout("fit expand"))
 hl.bind(mainMod .. " + C",          hl.dsp.layout("center"))
 
 -- Shift + wheel moves along the columns
-hl.bind(mainMod .. " + SHIFT + mouse_down",        hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + SHIFT + mouse_up",          hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + mouse_down",        hl.dsp.layout("focus r"))
+hl.bind(mainMod .. " + SHIFT + mouse_up",          hl.dsp.layout("focus l"))
 hl.bind(mainMod .. " + CTRL + SHIFT + mouse_down", hl.dsp.layout("swapcol r"))
 hl.bind(mainMod .. " + CTRL + SHIFT + mouse_up",   hl.dsp.layout("swapcol l"))
 
@@ -353,9 +376,9 @@ hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
 
 -- Screenshots: window, monitor, region (requires hyprshot)
-hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("hyprshot -m window"))
-hl.bind("Print",               hl.dsp.exec_cmd("hyprshot -m output"))
-hl.bind("SHIFT + Print",       hl.dsp.exec_cmd("hyprshot -m region"))
+hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd("hyprshot -m window -o ~/Pictures/Screenshots"))
+hl.bind("Print",               hl.dsp.exec_cmd("hyprshot -m output -o ~/Pictures/Screenshots"))
+hl.bind("SHIFT + Print",       hl.dsp.exec_cmd("hyprshot -m region -o ~/Pictures/Screenshots"))
 
 
 --------------------------------

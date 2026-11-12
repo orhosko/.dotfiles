@@ -56,6 +56,9 @@
 
   "hyprland/workspaces": {
     "all-outputs": true,
+    // Always show 1-10, even when empty. Listed by number because "*": 5 numbers them
+    // per monitor ID, so a closed lid shifted them to 6-10. [] = every monitor.
+    "persistent-workspaces": { "1": [], "2": [], "3": [], "4": [], "5": [], "6": [], "7": [], "8": [], "9": [], "10": [] },
     "format": "{icon}",
     "format-icons": {
       //"1": "一",
@@ -65,6 +68,7 @@
       //"5": "五",
       "active": "",
       "default": "󰧞",
+      "empty": "○", // workspaces with no windows
     },
   },
 
